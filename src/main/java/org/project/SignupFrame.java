@@ -25,13 +25,11 @@ public class SignupFrame extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(240, 242, 245));
 
-        // Main panel with padding
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBackground(new Color(240, 242, 245));
         mainPanel.setBorder(new EmptyBorder(40, 60, 50, 60));
 
-        // Logo/Title Panel
         JPanel titlePanel = new JPanel();
         titlePanel.setBackground(new Color(240, 242, 245));
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
@@ -44,7 +42,6 @@ public class SignupFrame extends JFrame {
         titlePanel.add(titleLabel);
         titlePanel.add(Box.createVerticalStrut(5));
 
-        // Form Panel
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
         formPanel.setBackground(Color.WHITE);
@@ -53,7 +50,6 @@ public class SignupFrame extends JFrame {
                 new EmptyBorder(30, 40, 30, 40)
         ));
 
-        // Username Field
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 13));
         usernameLabel.setForeground(new Color(51, 51, 51));
@@ -73,7 +69,6 @@ public class SignupFrame extends JFrame {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
-        // Email Field
         JLabel emailLabel = new JLabel("Email Address");
         emailLabel.setFont(new Font("Arial", Font.BOLD, 13));
         emailLabel.setForeground(new Color(51, 51, 51));
@@ -90,7 +85,6 @@ public class SignupFrame extends JFrame {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
-        // Password Field
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setFont(new Font("Arial", Font.BOLD, 13));
         passwordLabel.setForeground(new Color(51, 51, 51));
@@ -110,7 +104,6 @@ public class SignupFrame extends JFrame {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
-        // Confirm Password Field
         JLabel confirmPasswordLabel = new JLabel("Confirm Password");
         confirmPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
         confirmPasswordLabel.setForeground(new Color(51, 51, 51));
@@ -130,7 +123,6 @@ public class SignupFrame extends JFrame {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
-        // Role Field
         JLabel roleLabel = new JLabel("Role");
         roleLabel.setFont(new Font("Arial", Font.BOLD, 13));
         roleLabel.setForeground(new Color(51, 51, 51));
@@ -149,7 +141,6 @@ public class SignupFrame extends JFrame {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
-        // Signup Button
         signupButton = new JButton("Sign Up");
         signupButton.setFont(new Font("Arial", Font.BOLD, 15));
         signupButton.setForeground(Color.WHITE);
@@ -162,7 +153,6 @@ public class SignupFrame extends JFrame {
         signupButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         signupButton.addActionListener(e -> handleSignup());
 
-        // Back to login link panel
         JPanel loginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         loginPanel.setBackground(Color.WHITE);
 
@@ -182,7 +172,6 @@ public class SignupFrame extends JFrame {
         loginPanel.add(loginLabel);
         loginPanel.add(backButton);
 
-        // Add components to form panel
         formPanel.add(usernameLabel);
         formPanel.add(Box.createVerticalStrut(5));
         formPanel.add(usernameSubtitle);
@@ -213,7 +202,6 @@ public class SignupFrame extends JFrame {
         formPanel.add(Box.createVerticalStrut(15));
         formPanel.add(loginPanel);
 
-        // Add to main panel
         mainPanel.add(titlePanel);
         mainPanel.add(Box.createVerticalStrut(40));
         mainPanel.add(formPanel);
