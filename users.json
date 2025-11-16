@@ -1,0 +1,44 @@
+[
+  {
+    "userId": "1c1ae5e3-1b26-421e-ba7c-014e6108a16f",
+    "username": "ziad nasser",
+    "email": "ziad11@gmail.com",
+    "passwordHash": "91b4d142823f7d20c5f08df69122de43f35f057a988d9619f6d3138485c9a203",
+    "role": "Student"
+  },
+  {
+    "userId": "93167446-9520-41f9-8e09-984482f3dbf4",
+    "username": "Laila Abohadid",
+    "email": "lailahadid@gmail.com",
+    "passwordHash": "af41e68e1309fa29a5044cbdc36b90a3821d8807e68c7675a6c495112bc8a55f",
+    "role": "Instructor"
+  },
+  {
+    "userId": "85871195-a966-4913-8bb9-4e94ef57c2d2",
+    "username": "Youssef Amr",
+    "email": "yossef22@gmail.com",
+    "passwordHash": "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a",
+    "role": "Student"
+  },
+  {
+    "userId": "4091ebca-8383-4d46-8408-d713a1ded971",
+    "username": "Youssef Amr",
+    "email": "youssef22@gmail.com",
+    "passwordHash": "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a",
+    "role": "Student"
+  },
+  {
+    "userId": "83abd53d-823f-4cd4-bee8-0276f713e308",
+    "username": "Malak Hussein",
+    "email": "malak3@gmail.com",
+    "passwordHash": "4cc8f4d609b717356701c57a03e737e5ac8fe885da8c7163d3de47e01849c635",
+    "role": "Student"
+  },
+  {
+    "userId": "842ec839-1d0a-4724-b52f-67c268546524",
+    "username": "Moamen Wael",
+    "email": "moamen@gmail.com",
+    "passwordHash": "4cc8f4d609b717356701c57a03e737e5ac8fe885da8c7163d3de47e01849c635",
+    "role": "Student"
+  }
+]

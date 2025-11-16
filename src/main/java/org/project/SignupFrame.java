@@ -1,3 +1,4 @@
+package org.project;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -256,7 +257,7 @@ public class SignupFrame extends JFrame {
 
         if (success) {
             JOptionPane.showMessageDialog(this,
-                    "Account created successfully!\nYou can now login.",
+                    "Account created successfully.",
                     "Success",
                     JOptionPane.INFORMATION_MESSAGE);
             backToLogin();

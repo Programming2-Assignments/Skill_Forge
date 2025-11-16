@@ -1,9 +1,11 @@
+package org.project;
+
 public abstract class User {
     private String userId;
     private String username;
     private String email;
     private String passwordHash;
-    private String role;
+    protected String role;
 
 
     public User(String userId, String username, String email, String passwordHash, String role) {

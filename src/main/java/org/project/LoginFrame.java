@@ -1,3 +1,4 @@
+package org.project;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -7,10 +8,10 @@ public class LoginFrame extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton signupButton;
-    private AuthenticationManager authManager;
+    private AuthenticationManager auth;
 
     public LoginFrame() {
-        authManager = new AuthenticationManager();
+        auth = new AuthenticationManager();
         UI();
     }
 
@@ -133,7 +134,7 @@ public class LoginFrame extends JFrame {
             return;
         }
 
-        User user = authManager.login(email, password);
+        User user = auth.login(email, password);
 
         if (user != null) {
             JOptionPane.showMessageDialog(this,
