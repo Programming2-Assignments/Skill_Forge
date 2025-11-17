@@ -1,4 +1,4 @@
-package org.skillforge.model;
+package org.project.model;
 
 import java.util.*;
 

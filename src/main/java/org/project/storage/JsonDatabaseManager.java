@@ -1,5 +1,6 @@
-package org.project;
+package org.project.storage;
 import com.google.gson.*;
+import org.project.model.Student;
 import org.project.model.Instructor;
 import org.project.model.User;
 

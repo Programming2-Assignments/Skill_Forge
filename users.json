@@ -40,5 +40,12 @@
     "email": "moamen@gmail.com",
     "passwordHash": "4cc8f4d609b717356701c57a03e737e5ac8fe885da8c7163d3de47e01849c635",
     "role": "Student"
+  },
+  {
+    "userId": "9b3592af-4d08-4496-8e42-738857f82609",
+    "username": "sos",
+    "email": "sos@sos.com",
+    "passwordHash": "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a",
+    "role": "Student"
   }
 ]

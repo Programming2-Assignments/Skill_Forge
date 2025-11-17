@@ -1,4 +1,4 @@
-package org.skillforge.model;
+package org.project.model;
 
 public class Lesson {
     private int lessonId;

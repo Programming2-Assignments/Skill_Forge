@@ -1,4 +1,10 @@
-package org.project;
+package org.project.Frontend;
+import org.project.InstructorDashboardFrame;
+import org.project.model.Instructor;
+import org.project.model.Student;
+import org.project.model.User;
+import org.project.service.AuthenticationManager;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

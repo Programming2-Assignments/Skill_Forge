@@ -1,4 +1,7 @@
 package org.project;
+import org.project.Frontend.LoginFrame;
+import org.project.model.Instructor;
+
 import javax.swing.*;
 import java.awt.*;
 

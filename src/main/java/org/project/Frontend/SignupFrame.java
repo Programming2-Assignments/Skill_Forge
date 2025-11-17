@@ -1,4 +1,6 @@
-package org.project;
+package org.project.Frontend;
+import org.project.service.AuthenticationManager;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

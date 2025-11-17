@@ -1,4 +1,4 @@
-package org.skillforge.storage;
+package org.project;
 
 public class DemoCourseManager {
     public static void main(String[] args) {

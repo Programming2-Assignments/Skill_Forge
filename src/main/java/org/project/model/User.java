@@ -1,4 +1,4 @@
-package org.project;
+package org.project.model;
 
 public abstract class User {
     private String userId;

@@ -1,4 +1,4 @@
-package org.project;
+package org.project.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.*;

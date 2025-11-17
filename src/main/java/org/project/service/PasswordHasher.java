@@ -1,4 +1,4 @@
-package org.project;
+package org.project.service;
 import java.security.MessageDigest;
 
 public class PasswordHasher {

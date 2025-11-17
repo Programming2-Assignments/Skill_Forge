@@ -1,6 +1,6 @@
-package org.project;
+package org.project.model;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Instructor extends User {
     ArrayList<Course> courses;
@@ -10,4 +10,11 @@ public class Instructor extends User {
         courses = new ArrayList<>();
     }
 
+    public void addCourse(Course course){
+        courses.add(course);
+    }
+
+    public void removeCourse(Course course){
+        courses.remove(course);
+    }
 }

@@ -1,8 +1,8 @@
-package org.skillforge.storage;
+package org.project;
 
-import org.skillforge.model.Course;
-import org.skillforge.model.Lesson;
-import org.skillforge.service.CourseJsonDb;
+import org.project.model.Course;
+import org.project.model.Lesson;
+import org.project.storage.CourseJsonDb;
 
 import java.util.ArrayList;
 
