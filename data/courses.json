@@ -1,0 +1,138 @@
+[
+  {
+    "courseId": 1,
+    "title": "Java OOP",
+    "description": "Intro to OOP concepts",
+    "instructorId": 2,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "Lesson 1 - Classes \u0026 Objects",
+        "content": "Introduction to classes and objects."
+      },
+      {
+        "lessonId": 2,
+        "title": "Lesson 2 - Inheritance",
+        "content": "Learn about inheritance in Java."
+      }
+    ],
+    "students": [
+      5,
+      6
+    ]
+  },
+  {
+    "courseId": 2,
+    "title": "Python Basics",
+    "description": "Introduction to Python programming",
+    "instructorId": 3,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "Lesson 1 - Python Syntax",
+        "content": "Basic syntax, variables, and data types."
+      },
+      {
+        "lessonId": 2,
+        "title": "Lesson 2 - Loops",
+        "content": "For and while loops in Python."
+      }
+    ],
+    "students": [
+      6,
+      7
+    ]
+  },
+  {
+    "courseId": 3,
+    "title": "Web Development",
+    "description": "HTML, CSS, and JavaScript basics",
+    "instructorId": 4,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "Lesson 1 - HTML Basics",
+        "content": "Structure of a web page."
+      },
+      {
+        "lessonId": 2,
+        "title": "Lesson 2 - CSS Styling",
+        "content": "Styling web pages with CSS."
+      },
+      {
+        "lessonId": 3,
+        "title": "Lesson 3 - JavaScript Introduction",
+        "content": "Basic scripting and DOM manipulation."
+      }
+    ],
+    "students": [
+      5,
+      7,
+      8
+    ]
+  },
+  {
+    "courseId": 4,
+    "title": "Java OOP",
+    "description": "Intro to OOP",
+    "instructorId": 2,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "Lesson 1",
+        "content": "Content"
+      }
+    ],
+    "students": [
+      5
+    ]
+  },
+  {
+    "courseId": 5,
+    "title": "Java OOP",
+    "description": "Intro to OOP",
+    "instructorId": 2,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "Lesson 1",
+        "content": "Content"
+      }
+    ],
+    "students": [
+      5
+    ]
+  },
+  {
+    "courseId": 6,
+    "title": "Java OOP",
+    "description": "Intro to OOP",
+    "instructorId": 2,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "Lesson 1",
+        "content": "Content"
+      }
+    ],
+    "students": [
+      5
+    ]
+  },
+  {
+    "courseId": 7,
+    "title": "Java OOP",
+    "description": "Intro to OOP",
+    "instructorId": 2,
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "Lesson 1",
+        "content": "Content"
+      }
+    ],
+    "students": [
+      5
+    ]
+  }
+]
