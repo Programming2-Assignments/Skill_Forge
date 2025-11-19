@@ -36,32 +36,6 @@
     "students": []
   },
   {
-    "courseId": 1031,
-    "title": "prog 0",
-    "description": "blsdblfdkfsdlkdslkjfklds",
-    "instructorId": 1599,
-    "lessons": [
-      {
-        "lessonId": 1717,
-        "title": "uml",
-        "content": "uml diagrams and relations between them"
-      }
-    ],
-    "students": [
-      3746
-    ]
-  },
-  {
-    "courseId": 1581,
-    "title": "prog 1",
-    "description": "pointer pointer teramisuuuuuuuu",
-    "instructorId": 1599,
-    "lessons": [],
-    "students": [
-      3746
-    ]
-  },
-  {
     "courseId": 9283,
     "title": "database",
     "description": "add acid to make data",
