@@ -3,18 +3,20 @@ package org.project.model;
 import java.util.ArrayList;
 
 public class Instructor extends User {
-    ArrayList<Course> courses;
+    ArrayList<Integer> coursesID;
 
     public Instructor(String userId, String username, String email, String passwordHash) {
         super(userId, username, email, passwordHash, "Instructor");
-        courses = new ArrayList<>();
+        coursesID = new ArrayList<>();
     }
 
-    public void addCourse(Course course){
-        courses.add(course);
+    public void addCourse(Integer courseid){
+        Integer cID = courseid;
+        coursesID.add(cID);
     }
 
-    public void removeCourse(Course course){
-        courses.remove(course);
+    public void removeCourse(Integer courseid){
+        Integer cID = courseid;
+        coursesID.remove(cID);
     }
 }

@@ -1,5 +1,5 @@
 package org.project.Frontend;
-import org.project.InstructorDashboardFrame;
+import org.project.Frontend.InstructorDashboardFrame;
 import org.project.model.Instructor;
 import org.project.model.Student;
 import org.project.model.User;

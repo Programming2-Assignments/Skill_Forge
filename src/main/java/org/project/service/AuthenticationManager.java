@@ -5,6 +5,7 @@ import org.project.model.User;
 import org.project.storage.JsonDatabaseManager;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
 public class AuthenticationManager {
@@ -43,7 +44,8 @@ public class AuthenticationManager {
         }
 
 
-        String userId = UUID.randomUUID().toString();
+        String userId = String.valueOf(new Random().nextInt(10000));
+
         String passwordHash = PasswordHasher.hashPassword(password);
 
         User newUser;

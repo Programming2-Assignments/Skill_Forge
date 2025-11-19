@@ -15,10 +15,11 @@ public class InstructorRole {
     public Course createCourse(Instructor instructor, String title, String description) {
         ArrayList<Course> courses = Cdb.loadCourses();
         int courseID = new Random().nextInt(10000);
-        Course course=new Course(courseID,title,description,Integer.parseInt(instructor.getUserId()));
+        int intsID = Integer.parseInt(instructor.getUserId());
+        Course course=new Course(courseID,title,description,intsID);
         courses.add(course);
         Cdb.saveCourses(courses);
-        instructor.addCourse(course);
+        instructor.addCourse(courseID);
         saveInstructor(instructor);
         return course;
     }
@@ -28,7 +29,7 @@ public class InstructorRole {
         for (Course c : courses) {
             if (c.getCourseId()==courseId) {
                 courses.remove(c);
-                instructor.removeCourse(c);
+                instructor.removeCourse(courseId);
                 break;
             }
         }

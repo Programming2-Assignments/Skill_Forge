@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CourseJsonDb {
-    private static final String COURSES_FILE = "data/courses.json";
+    private static final String COURSES_FILE = "courses.json";
     private Gson gson;
 
     public CourseJsonDb() {
