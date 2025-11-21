@@ -78,4 +78,26 @@ public class JsonDatabaseManager {
         }
         return false;
     }
+
+    public boolean enrollStudentInCourse(String studentId, int courseId) {
+        ArrayList<User> users = loadUsers();
+        for (int i = 0; i < users.size(); i++) {
+            User u = users.get(i);
+            if (u.getUserId().equals(studentId) && u instanceof Student) {
+                Student s = (Student) u;
+                // avoid duplicate enrollment
+                if (s.getEnrolledCourses().contains(courseId)) {
+                    return false;
+                }
+                // add course ID only
+                s.getEnrolledCourses().add(courseId);
+                s.getProgress().put(courseId, 0);
+                users.set(i, s);
+                saveUsers(users);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

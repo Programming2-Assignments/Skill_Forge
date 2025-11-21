@@ -43,9 +43,8 @@ public class AuthenticationManager {
             }
         }
 
-
-        String userId = String.valueOf(new Random().nextInt(10000));
-
+        Integer n = new Random().nextInt(10000);
+        String userId = String.valueOf(n);
         String passwordHash = PasswordHasher.hashPassword(password);
 
         User newUser;

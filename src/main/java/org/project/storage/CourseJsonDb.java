@@ -26,14 +26,17 @@ public class CourseJsonDb {
         }
 
         try (FileReader reader = new FileReader(COURSES_FILE)) {
-            Course[] courseArray = gson.fromJson(reader, Course[].class);
-            if (courseArray != null) {
-                Collections.addAll(courses, courseArray);
+            JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
+
+            for (JsonElement element : jsonArray) {
+                JsonObject courseObj = element.getAsJsonObject();
+
+                // Deserialize course with Gson
+                Course c = gson.fromJson(courseObj, Course.class);
+                courses.add(c);
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
 
         return courses;
     }
@@ -42,9 +45,7 @@ public class CourseJsonDb {
     public void saveCourses(ArrayList<Course> courses) {
         try (FileWriter writer = new FileWriter(COURSES_FILE)) {
             gson.toJson(courses, writer);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     // ADD COURSE
@@ -139,35 +140,26 @@ public class CourseJsonDb {
         return false;
     }
 
+    public ArrayList<Course> getAllCourses() {
+        return new ArrayList<>(loadCourses());
+    }
 
-    // ENROLL STUDENT
-    public boolean enrollStudent(int courseId, int studentId) {
+
+    public boolean addStudentToCourse(int courseId, int studentId) {
         ArrayList<Course> courses = loadCourses();
 
-        for (Course c : courses)
+        for (int i = 0; i < courses.size(); i++) {
+            Course c = courses.get(i);
+
             if (c.getCourseId() == courseId) {
-                boolean added = c.enrollStudent(studentId);
-                if (added) {
+                if (!c.getStudents().contains(studentId)) {
+                    c.getStudents().add(studentId);
                     saveCourses(courses);
+                    return true;
                 }
-                return added;
+                return false;
             }
-
+        }
         return false;
     }
-
-    // UNENROLL STUDENT
-    public boolean unenrollStudent(int courseId, int studentId) {
-        ArrayList<Course> courses = loadCourses();
-
-        for (Course c : courses)
-            if (c.getCourseId() == courseId) {
-                boolean removed = c.unenrollStudent(studentId);
-                if (removed) saveCourses(courses);
-                return removed;
-            }
-
-        return false;
-    }
-
 }

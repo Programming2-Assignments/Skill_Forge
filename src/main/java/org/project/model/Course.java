@@ -9,6 +9,8 @@ public class Course {
     private int instructorId;
     private List<Lesson> lessons;
     private List<Integer> students;
+    private int NoOfLesson;
+    private int NoOfChecked;
 
     // Default constructor required for Gson
     public Course() {
@@ -90,14 +92,35 @@ public class Course {
         return lessons.stream().filter(l -> l.getLessonId() == lessonId).findFirst().orElse(null);
     }
 
+    public int getNoOfLesson() {
+        return NoOfLesson;
+    }
+
+    public void setNoOfLesson(int noOfLesson) {
+        NoOfLesson = noOfLesson;
+    }
+
     public boolean enrollStudent(int studentId) {
-        if (students.contains(studentId)) return false;
+        if (students.contains(studentId))
+            return false;
         students.add(studentId);
         return true;
     }
 
     public boolean unenrollStudent(int studentId) {
         return students.remove(Integer.valueOf(studentId));
+    }
+
+    public void addlesson(){
+        this.NoOfLesson = this.NoOfLesson + 1 ;
+    }
+
+    public void addchecked(){
+        this.NoOfChecked = this.NoOfChecked + 1 ;
+    }
+
+    public double calculateprogress(){
+        return (1.0*(this.NoOfChecked)/1.0*(this.NoOfLesson));
     }
 
     @Override

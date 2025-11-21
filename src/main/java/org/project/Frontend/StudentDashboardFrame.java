@@ -1,4 +1,5 @@
 package org.project.Frontend;
+import org.project.model.Lesson;
 import org.project.model.Student;
 import org.project.model.Course;
 import org.project.storage.CourseJsonDb;
@@ -32,6 +33,7 @@ public class StudentDashboardFrame extends JFrame {
     public StudentDashboardFrame(Student student) {
         this.student = student;
         db2 = new CourseJsonDb();
+        this.db = new JsonDatabaseManager();
         setupUI();
 
     }
@@ -161,18 +163,12 @@ public class StudentDashboardFrame extends JFrame {
     private void loadCoursesIntoTable(DefaultTableModel model) {
         model.setRowCount(0);
 
-        System.out.println("DEBUG: Loading courses...");
-        ArrayList<Course> all = db2.loadCourses();
-        System.out.println("DEBUG: Number of courses = " + all.size());
+        ArrayList<Course> all = db2.getAllCourses();
 
         for (Course c : all) {
-            System.out.println("DEBUG: Loaded course: " + c.getCourseId() + " - " + c.getTitle());
-        }
 
-        for (Course c : all) {
             boolean enrolled = student.getEnrolledCourses().contains(c.getCourseId());
-            int progress;
-            progress = student.getProgress().getOrDefault(c.getCourseId(), 0);
+            int progress = student.calculateProgress(c.getCourseId());
 
             model.addRow(new Object[]{
                     c.getCourseId(),
@@ -186,35 +182,77 @@ public class StudentDashboardFrame extends JFrame {
 
 
     private void EnrollCourse() {
-        DefaultTableModel model = (DefaultTableModel) coursesTable.getModel();
+        String id = tfCourseId.getText().trim();
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No course selected.");
+            return;
+        }
 
-        // Get course ID as String
-        int courseId = Integer.parseInt(tfCourseId.getText().trim());
-        String enrollment = tfEnrolled.getText().trim();
+        int courseId = Integer.parseInt(id);
 
-        // Check if student is already enrolled
-        if (!"Enrolled".equals(enrollment)) {
-            // Get the course
-            Course temp = db2.getCourseById(courseId);
 
-            if (temp != null) {
-                int studentId = Integer.parseInt(student.getUserId()); // keep as String
-                boolean success = db2.enrollStudent(courseId, studentId); // update db2 method to accept String IDs
+        if (student.getEnrolledCourses().contains(courseId)) {
+            JOptionPane.showMessageDialog(this, "Already enrolled!");
+            return;
+        }
 
-                if (success) {
-                    loadCoursesIntoTable(model);
-                    JOptionPane.showMessageDialog(this, "Successfully enrolled!", "Enrollment Message", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Enrollment failed!", "Enrollment Message", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Course not found!", "Enrollment Message", JOptionPane.ERROR_MESSAGE);
+        boolean addedToCourse = db2.addStudentToCourse(courseId, Integer.parseInt(student.getUserId()));
+        Course c = db2.getCourseById(courseId);
+
+        boolean addedToStudent = db.enrollStudentInCourse(student.getUserId(), courseId);
+
+        if (addedToCourse && addedToStudent) {
+            student = (Student) db.findUserByEmail(student.getEmail());
+            ArrayList<Integer> lessonIds = new ArrayList<>();
+            for (Lesson l : c.getLessons()) {
+                lessonIds.add(l.getLessonId());
             }
 
+            student.setLessonsForCourse(courseId, lessonIds);
+            db.updateUser(student);
+            refreshTable();
+            JOptionPane.showMessageDialog(this, "Successfully enrolled!");
         } else {
-            JOptionPane.showMessageDialog(this, "Already enrolled!", "Enrollment Message", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Enrollment failed");
         }
     }
-    private void  viewlesson(){}
+    private void refreshTable() {
+        DefaultTableModel model = (DefaultTableModel) coursesTable.getModel();
+        model.setRowCount(0);
+
+        ArrayList<Course> allCourses = db2.getAllCourses();
+
+        for (Course c : allCourses) {
+            boolean enrolled = student.getEnrolledCourses().contains(c.getCourseId());
+            double progress = c.calculateprogress();
+
+            model.addRow(new Object[]{
+                    c.getCourseId(),
+                    c.getTitle(),
+                    c.getInstructorId(),
+                    enrolled ? "Enrolled" : "Not Enrolled",
+                    progress + "%"
+            });
+        }
+
+        model.fireTableDataChanged();
+    }
+
+
+
+    private void viewlesson() {
+        String id = tfCourseId.getText().trim();
+
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a course first.");
+            return;
+        }
+
+        int courseId = Integer.parseInt(id);
+
+        new LessonViewerFrame(db2.getCourseById(courseId),student);
+        dispose();
+    }
+
 
 }

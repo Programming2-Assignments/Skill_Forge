@@ -4,6 +4,7 @@ public class Lesson {
     private int lessonId;
     private String title;
     private String content;
+    private boolean check;
 
     // Constructors
     public Lesson() {
@@ -13,6 +14,14 @@ public class Lesson {
         this.lessonId = lessonId;
         this.title = title;
         this.content = content;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
     }
 
     // Getters and Setters
