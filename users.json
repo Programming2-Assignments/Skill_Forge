@@ -1,0 +1,61 @@
+[
+  {
+    "userId": "9359",
+    "username": "ziad nasser",
+    "email": "ziad11@gmail.com",
+    "passwordHash": "91b4d142823f7d20c5f08df69122de43f35f057a988d9619f6d3138485c9a203",
+    "role": "Student"
+  },
+  {
+    "userId": "9494",
+    "username": "Youssef Amr",
+    "email": "yossef22@gmail.com",
+    "passwordHash": "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a",
+    "role": "Student"
+  },
+  {
+    "userId": "8831",
+    "username": "Malak Hussein",
+    "email": "malak3@gmail.com",
+    "passwordHash": "4cc8f4d609b717356701c57a03e737e5ac8fe885da8c7163d3de47e01849c635",
+    "role": "Student"
+  },
+  {
+    "userId": "9256",
+    "username": "Moamen Wael",
+    "email": "moamen@gmail.com",
+    "passwordHash": "4cc8f4d609b717356701c57a03e737e5ac8fe885da8c7163d3de47e01849c635",
+    "role": "Student"
+  },
+  {
+    "userId": "9407",
+    "username": "sos",
+    "email": "sos@sos.com",
+    "passwordHash": "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a",
+    "role": "Student"
+  },
+  {
+    "userId": "8200",
+    "username": "y",
+    "email": "y@gamil.com",
+    "passwordHash": "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a",
+    "role": "Student"
+  },
+  {
+    "userId": "3746",
+    "username": "y",
+    "email": "y@gmail.com",
+    "passwordHash": "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a",
+    "role": "Student"
+  },
+  {
+    "coursesID": [
+      9283
+    ],
+    "userId": "1599",
+    "username": "h",
+    "email": "h@gmail.com",
+    "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+    "role": "Instructor"
+  }
+]

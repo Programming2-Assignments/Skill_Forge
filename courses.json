@@ -1,0 +1,53 @@
+[
+  {
+    "courseId": 5321,
+    "title": "xrdctfvgh",
+    "description": "rdcgvhbj",
+    "instructorId": 3003,
+    "lessons": [
+      {
+        "lessonId": 1933,
+        "title": "sdhafjhsdlkf",
+        "content": "dskjfhakfvmdsjk"
+      }
+    ],
+    "students": [
+      3746,
+      8200,
+      9407
+    ]
+  },
+  {
+    "courseId": 6802,
+    "title": "prog 2",
+    "description": "oop\numl\nbullshit",
+    "instructorId": 1111,
+    "lessons": [],
+    "students": [
+      3746
+    ]
+  },
+  {
+    "courseId": 9724,
+    "title": "prog 2",
+    "description": "oop\numl\nbullshit",
+    "instructorId": 1111,
+    "lessons": [],
+    "students": []
+  },
+  {
+    "courseId": 9283,
+    "title": "database",
+    "description": "add acid to make data",
+    "instructorId": 1599,
+    "lessons": [],
+    "students": [
+      3746,
+      9494,
+      8831,
+      9256,
+      9407,
+      8200
+    ]
+  }
+]
