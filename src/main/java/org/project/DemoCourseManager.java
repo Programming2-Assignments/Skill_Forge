@@ -2,7 +2,7 @@ package org.project;
 
 public class DemoCourseManager {
     public static void main(String[] args) {
-        CourseManager manager = new CourseManager();
+       /* CourseManager manager = new CourseManager();
 
         // Create course
         var course = manager.createCourse("Java OOP", "Intro to OOP", 2);
@@ -20,5 +20,5 @@ public class DemoCourseManager {
 
         // Display all courses
         manager.getAllCourses().forEach(System.out::println);
-    }
+    */}
 }

@@ -8,14 +8,19 @@
       {
         "lessonId": 1933,
         "title": "sdhafjhsdlkf",
-        "content": "dskjfhakfvmdsjk"
+        "content": "dskjfhakfvmdsjk",
+        "check": false
       }
     ],
     "students": [
       3746,
       8200,
-      9407
-    ]
+      9407,
+      6742,
+      7973
+    ],
+    "NoOfLesson": 0,
+    "NoOfChecked": 0
   },
   {
     "courseId": 6802,
@@ -24,8 +29,11 @@
     "instructorId": 1111,
     "lessons": [],
     "students": [
-      3746
-    ]
+      3746,
+      6742
+    ],
+    "NoOfLesson": 0,
+    "NoOfChecked": 0
   },
   {
     "courseId": 9724,
@@ -33,7 +41,12 @@
     "description": "oop\numl\nbullshit",
     "instructorId": 1111,
     "lessons": [],
-    "students": []
+    "students": [
+      6742,
+      7973
+    ],
+    "NoOfLesson": 0,
+    "NoOfChecked": 0
   },
   {
     "courseId": 9283,
@@ -47,7 +60,43 @@
       8831,
       9256,
       9407,
-      8200
-    ]
+      8200,
+      6742
+    ],
+    "NoOfLesson": 0,
+    "NoOfChecked": 0
+  },
+  {
+    "courseId": 9819,
+    "title": "tests",
+    "description": "her is tests",
+    "instructorId": 6413,
+    "lessons": [
+      {
+        "lessonId": 6297,
+        "title": "more tests",
+        "content": "her is more tests",
+        "check": false
+      },
+      {
+        "lessonId": 9469,
+        "title": "2",
+        "content": "2",
+        "check": false
+      },
+      {
+        "lessonId": 889,
+        "title": "3",
+        "content": "3",
+        "check": false
+      }
+    ],
+    "students": [
+      6742,
+      7973,
+      4345
+    ],
+    "NoOfLesson": 3,
+    "NoOfChecked": 0
   }
 ]

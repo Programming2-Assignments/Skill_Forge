@@ -66,14 +66,14 @@ public class CourseManager {
 
     // STUDENT ENROLLMENT
     // ENROLL
-    public boolean enrollStudent(int courseId, int studentId) {
+  /*  public boolean enrollStudent(int courseId, int studentId) {
         return courseDb.enrollStudent(courseId, studentId);
     }
 
     // UNENROLL
     public boolean unenrollStudent(int courseId, int studentId) {
         return courseDb.unenrollStudent(courseId, studentId);
-    }
+    }*/
 
 
     // COURSE RETRIEVAL
