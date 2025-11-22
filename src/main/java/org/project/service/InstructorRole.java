@@ -1,4 +1,4 @@
-package org.project;
+package org.project.service;
 import org.project.model.*;
 import org.project.storage.CourseJsonDb;
 import org.project.storage.JsonDatabaseManager;

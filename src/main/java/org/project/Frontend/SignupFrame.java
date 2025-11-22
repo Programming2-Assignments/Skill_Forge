@@ -247,7 +247,7 @@ public class SignupFrame extends JFrame {
 
         if (success) {
             JOptionPane.showMessageDialog(this,
-                    "Account created successfully.",
+                    "Account created successfully!\nYou can now login.",
                     "Success",
                     JOptionPane.INFORMATION_MESSAGE);
             backToLogin();

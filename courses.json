@@ -8,14 +8,18 @@
       {
         "lessonId": 1933,
         "title": "sdhafjhsdlkf",
-        "content": "dskjfhakfvmdsjk"
+        "content": "dskjfhakfvmdsjk",
+        "check": false
       }
     ],
     "students": [
       3746,
       8200,
-      9407
-    ]
+      9407,
+      8419
+    ],
+    "NoOfChecked": 0,
+    "NoOfLesson": 0
   },
   {
     "courseId": 6802,
@@ -24,8 +28,11 @@
     "instructorId": 1111,
     "lessons": [],
     "students": [
-      3746
-    ]
+      3746,
+      8419
+    ],
+    "NoOfChecked": 0,
+    "NoOfLesson": 0
   },
   {
     "courseId": 9724,
@@ -33,7 +40,9 @@
     "description": "oop\numl\nbullshit",
     "instructorId": 1111,
     "lessons": [],
-    "students": []
+    "students": [],
+    "NoOfChecked": 0,
+    "NoOfLesson": 0
   },
   {
     "courseId": 9283,
@@ -48,6 +57,8 @@
       9256,
       9407,
       8200
-    ]
+    ],
+    "NoOfChecked": 0,
+    "NoOfLesson": 0
   }
 ]

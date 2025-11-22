@@ -9,8 +9,8 @@ public class Course {
     private int instructorId;
     private List<Lesson> lessons;
     private List<Integer> students;
-    private int NoOfLesson;
     private int NoOfChecked;
+    private int NoOfLesson;
 
     // Default constructor required for Gson
     public Course() {

@@ -2,7 +2,7 @@ package org.project.Frontend;
 
 import org.project.model.Course;
 import org.project.model.Instructor;
-import org.project.InstructorRole;
+import org.project.service.InstructorRole;
 import org.project.model.Lesson;
 import org.project.model.Student;
 

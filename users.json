@@ -57,5 +57,32 @@
     "email": "h@gmail.com",
     "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
     "role": "Instructor"
+  },
+  {
+    "enrolledCourses": [
+      5321,
+      6802
+    ],
+    "progress": {
+      "5321": 0,
+      "6802": 0
+    },
+    "lessonsPerCourse": {
+      "5321": [
+        1933
+      ],
+      "6802": []
+    },
+    "checkedPerCourse": {
+      "5321": [
+        false
+      ],
+      "6802": []
+    },
+    "userId": "8419",
+    "username": "h",
+    "email": "h@.",
+    "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+    "role": "Student"
   }
 ]
