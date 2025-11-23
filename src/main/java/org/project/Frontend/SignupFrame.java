@@ -1,4 +1,5 @@
 package org.project.Frontend;
+
 import org.project.service.AuthenticationManager;
 
 import javax.swing.*;
@@ -76,8 +77,6 @@ public class SignupFrame extends JFrame {
         emailLabel.setForeground(new Color(51, 51, 51));
         emailLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
-
         emailField = new JTextField();
         emailField.setFont(new Font("Arial", Font.PLAIN, 14));
         emailField.setPreferredSize(new Dimension(300, 40));
@@ -106,6 +105,32 @@ public class SignupFrame extends JFrame {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
+        char passwordDefaultEcho = passwordField.getEchoChar();
+
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+        passwordPanel.setBackground(Color.WHITE);
+
+        JButton passwordEyeButton = new JButton("👁");
+        passwordEyeButton.setBorderPainted(false);
+        passwordEyeButton.setFocusPainted(false);
+        passwordEyeButton.setContentAreaFilled(false);
+        passwordEyeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        passwordEyeButton.addActionListener(e -> {
+            if (passwordField.getEchoChar() == 0) {
+                passwordField.setEchoChar(passwordDefaultEcho);
+                passwordEyeButton.setText("👁");
+            } else {
+                passwordField.setEchoChar((char) 0);
+                passwordEyeButton.setText("👁");
+            }
+        });
+
+        passwordPanel.add(passwordField);
+        passwordPanel.add(Box.createHorizontalStrut(5));
+        passwordPanel.add(passwordEyeButton);
+
         JLabel confirmPasswordLabel = new JLabel("Confirm Password");
         confirmPasswordLabel.setFont(new Font("Arial", Font.BOLD, 13));
         confirmPasswordLabel.setForeground(new Color(51, 51, 51));
@@ -125,12 +150,36 @@ public class SignupFrame extends JFrame {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
+        char confirmDefaultEcho = confirmPasswordField.getEchoChar();
+
+        JPanel confirmPasswordPanel = new JPanel();
+        confirmPasswordPanel.setLayout(new BoxLayout(confirmPasswordPanel, BoxLayout.X_AXIS));
+        confirmPasswordPanel.setBackground(Color.WHITE);
+
+        JButton confirmEyeButton = new JButton("👁");
+        confirmEyeButton.setBorderPainted(false);
+        confirmEyeButton.setFocusPainted(false);
+        confirmEyeButton.setContentAreaFilled(false);
+        confirmEyeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        confirmEyeButton.addActionListener(e -> {
+            if (confirmPasswordField.getEchoChar() == 0) {
+                confirmPasswordField.setEchoChar(confirmDefaultEcho);
+                confirmEyeButton.setText("👁");
+            } else {
+                confirmPasswordField.setEchoChar((char) 0);
+                confirmEyeButton.setText("👁");
+            }
+        });
+
+        confirmPasswordPanel.add(confirmPasswordField);
+        confirmPasswordPanel.add(Box.createHorizontalStrut(5));
+        confirmPasswordPanel.add(confirmEyeButton);
+
         JLabel roleLabel = new JLabel("Role");
         roleLabel.setFont(new Font("Arial", Font.BOLD, 13));
         roleLabel.setForeground(new Color(51, 51, 51));
         roleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-
 
         String[] roles = {"Student", "Instructor"};
         roleComboBox = new JComboBox<>(roles);
@@ -188,13 +237,13 @@ public class SignupFrame extends JFrame {
         formPanel.add(Box.createVerticalStrut(5));
         formPanel.add(passwordSubtitle);
         formPanel.add(Box.createVerticalStrut(8));
-        formPanel.add(passwordField);
+        formPanel.add(passwordPanel);
         formPanel.add(Box.createVerticalStrut(15));
         formPanel.add(confirmPasswordLabel);
         formPanel.add(Box.createVerticalStrut(5));
         formPanel.add(confirmPasswordSubtitle);
         formPanel.add(Box.createVerticalStrut(8));
-        formPanel.add(confirmPasswordField);
+        formPanel.add(confirmPasswordPanel);
         formPanel.add(Box.createVerticalStrut(15));
         formPanel.add(roleLabel);
         formPanel.add(Box.createVerticalStrut(5));

@@ -10,9 +10,10 @@ public class Course {
     private int instructorId;
     private List<Lesson> lessons;
     private List<Integer> students;
-    private int NoOfChecked;
     private int NoOfLesson;
+    private int NoOfChecked;
 
+    // Default constructor required for Gson
     public Course() {
         this.lessons = new ArrayList<>();
         this.students = new ArrayList<>();
@@ -70,7 +71,8 @@ public class Course {
     }
 
     public boolean enrollStudent(int studentId) {
-        if (students.contains(studentId)) return false;
+        if (students.contains(studentId))
+            return false;
         students.add(studentId);
         return true;
     }

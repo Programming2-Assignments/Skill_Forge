@@ -162,4 +162,12 @@ public class CourseJsonDb {
         }
         return false;
     }
+
+    public boolean enrollStudent(int courseId, int studentId) {
+        return enrollStudent(courseId, studentId);
+
+    }
+
+    public boolean unenrollStudent(int courseId, int studentId) {
+        return unenrollStudent(courseId, studentId);}
 }

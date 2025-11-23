@@ -1,26 +1,55 @@
 [
   {
     "courseId": 5321,
-    "title": "xrdctfvgh",
-    "description": "rdcgvhbj",
+    "title": "xx",
+    "description": "zz",
     "instructorId": 3003,
     "lessons": [
       {
         "lessonId": 1933,
-        "title": "sdhafjhsdlkf",
-        "content": "dskjfhakfvmdsjk",
-        "check": false
+        "title": "Lesson1",
+        "content": "aaa",
+        "check": false,
+        "quiz": {
+          "quizId": "Q1933",
+          "lessonId": "3694",
+          "questions": [
+            {
+              "questionId": "Q1",
+              "text": "What does JVM stand for?",
+              "options": [
+                "Java Virtual Machine",
+                "Java Volume Meter",
+                "Just a Very Machine",
+                "None"
+              ],
+              "correctOptionIndex": 0
+            },
+            {
+              "questionId": "Q2",
+              "text": "Which of the following is a primitive data type?",
+              "options": [
+                "String",
+                "Array",
+                "int",
+                "Class"
+              ],
+              "correctOptionIndex": 2
+            }
+          ],
+          "passScore": 60,
+          "maxAttempts": 50
+        }
       }
     ],
     "students": [
       3746,
       8200,
       9407,
-      6742,
-      7973
+      5067
     ],
-    "NoOfChecked": 0,
-    "NoOfLesson": 0
+    "NoOfLesson": 0,
+    "NoOfChecked": 0
   },
   {
     "courseId": 6802,
@@ -30,11 +59,10 @@
     "lessons": [],
     "students": [
       3746,
-      6742,
-      7973
+      5067
     ],
-    "NoOfChecked": 0,
-    "NoOfLesson": 0
+    "NoOfLesson": 0,
+    "NoOfChecked": 0
   },
   {
     "courseId": 9724,
@@ -43,11 +71,10 @@
     "instructorId": 1111,
     "lessons": [],
     "students": [
-      6742,
-      7973
+      5067
     ],
-    "NoOfChecked": 0,
-    "NoOfLesson": 0
+    "NoOfLesson": 0,
+    "NoOfChecked": 0
   },
   {
     "courseId": 9283,
@@ -62,49 +89,228 @@
       9256,
       9407,
       8200,
-      6742,
-      7973
+      5067
     ],
-    "NoOfChecked": 0,
-    "NoOfLesson": 0
+    "NoOfLesson": 0,
+    "NoOfChecked": 0
   },
   {
-    "courseId": 9819,
-    "title": "tests",
-    "description": "her is tests",
-    "instructorId": 6413,
+    "courseId": 7171,
+    "title": "oop java",
+    "description": "Programming 2",
+    "instructorId": 1599,
     "lessons": [
       {
-        "lessonId": 6297,
-        "title": "more tests",
-        "content": "her is more tests",
-        "check": false
+        "lessonId": 7625,
+        "title": "Lesson 1",
+        "content": "Intro",
+        "check": false,
+        "quiz": {
+          "quizId": "Q1933",
+          "lessonId": "3694",
+          "questions": [
+            {
+              "questionId": "Q1",
+              "text": "What does JVM stand for?",
+              "options": [
+                "Java Virtual Machine",
+                "Java Volume Meter",
+                "Just a Very Machine",
+                "None"
+              ],
+              "correctOptionIndex": 0
+            },
+            {
+              "questionId": "Q2",
+              "text": "Which of the following is a primitive data type?",
+              "options": [
+                "String",
+                "Array",
+                "int",
+                "Class"
+              ],
+              "correctOptionIndex": 2
+            }
+          ],
+          "passScore": 60,
+          "maxAttempts": 3
+        }
       },
       {
-        "lessonId": 9469,
-        "title": "2",
-        "content": "2",
-        "check": false
+        "lessonId": 1855,
+        "title": "Lesson 2",
+        "content": "Lec 1",
+        "check": false,
+        "quiz": {
+          "quizId": "Q1933",
+          "lessonId": "3694",
+          "questions": [
+            {
+              "questionId": "Q1",
+              "text": "What does JVM stand for?",
+              "options": [
+                "Java Virtual Machine",
+                "Java Volume Meter",
+                "Just a Very Machine",
+                "None"
+              ],
+              "correctOptionIndex": 0
+            },
+            {
+              "questionId": "Q2",
+              "text": "Which of the following is a primitive data type?",
+              "options": [
+                "String",
+                "Array",
+                "int",
+                "Class"
+              ],
+              "correctOptionIndex": 2
+            }
+          ],
+          "passScore": 60,
+          "maxAttempts": 3
+        }
       },
       {
-        "lessonId": 889,
-        "title": "3",
-        "content": "3",
-        "check": false
-      },
-      {
-        "lessonId": 8175,
-        "title": "kjlg",
-        "content": "sanlkgl",
-        "check": false
+        "lessonId": 3694,
+        "title": "Lesson 3",
+        "content": "Lec 2",
+        "check": false,
+        "quiz": {
+          "quizId": "Q1933",
+          "lessonId": "3694",
+          "questions": [
+            {
+              "questionId": "Q1",
+              "text": "What does JVM stand for?",
+              "options": [
+                "Java Virtual Machine",
+                "Java Volume Meter",
+                "Just a Very Machine",
+                "None"
+              ],
+              "correctOptionIndex": 0
+            },
+            {
+              "questionId": "Q2",
+              "text": "Which of the following is a primitive data type?",
+              "options": [
+                "String",
+                "Array",
+                "int",
+                "Class"
+              ],
+              "correctOptionIndex": 2
+            }
+          ],
+          "passScore": 60,
+          "maxAttempts": 3
+        }
       }
     ],
     "students": [
-      6742,
-      7973,
-      4345
+      5067
     ],
-    "NoOfChecked": 0,
-    "NoOfLesson": 4
+    "NoOfLesson": 3,
+    "NoOfChecked": 0
+  },
+  {
+    "courseId": 6593,
+    "title": "data structure",
+    "description": "c language",
+    "instructorId": 8653,
+    "lessons": [
+      {
+        "lessonId": 7112,
+        "title": "Lesson 1",
+        "content": "Lec 0",
+        "check": false,
+        "quiz": {
+          "quizId": "b3e141c0-b905-491d-93eb-06d3ceda1eb6",
+          "lessonId": "7112",
+          "questions": [
+            {
+              "questionId": "cf060b6f-fd54-43d4-897c-4d976a1f86bb",
+              "text": "Choose number 1",
+              "options": [
+                "one",
+                "1",
+                "number 1",
+                "number one"
+              ],
+              "correctOptionIndex": 2
+            },
+            {
+              "questionId": "9fa35904-94c6-4846-bbc6-0e6dd3eb15eb",
+              "text": "Choose number 2",
+              "options": [
+                "2",
+                "two",
+                "number 2",
+                "number two"
+              ],
+              "correctOptionIndex": 3
+            },
+            {
+              "questionId": "bd8596ba-0370-49be-9da4-ce5c614c60d9",
+              "text": "Choose number 3",
+              "options": [
+                "3",
+                "number 3",
+                "three",
+                "number three"
+              ],
+              "correctOptionIndex": 0
+            }
+          ],
+          "passScore": 50,
+          "maxAttempts": 10
+        }
+      }
+    ],
+    "students": [
+      5067
+    ],
+    "NoOfLesson": 1,
+    "NoOfChecked": 0
+  },
+  {
+    "courseId": 3780,
+    "title": "Circuits 2",
+    "description": "CCE",
+    "instructorId": 8653,
+    "lessons": [
+      {
+        "lessonId": 135,
+        "title": "Lesson 1",
+        "content": "Lec 1",
+        "check": false,
+        "quiz": {
+          "quizId": "e2421ad7-cebf-404a-96c5-2acb94a32994",
+          "lessonId": "135",
+          "questions": [
+            {
+              "questionId": "207b83ee-a632-4522-8784-89261a96fc06",
+              "text": "q1",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "correctOptionIndex": 0
+            }
+          ],
+          "passScore": 50,
+          "maxAttempts": -1
+        }
+      }
+    ],
+    "students": [
+      5067
+    ],
+    "NoOfLesson": 1,
+    "NoOfChecked": 0
   }
 ]

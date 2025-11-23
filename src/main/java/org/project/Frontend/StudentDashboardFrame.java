@@ -1,19 +1,23 @@
-
 package org.project.Frontend;
 
 import org.project.model.Certificate;
 import org.project.model.Course;
 import org.project.model.Lesson;
 import org.project.model.Student;
+import org.project.model.Course;
 import org.project.storage.CourseJsonDb;
 import org.project.storage.JsonDatabaseManager;
+import org.project.storage.QuizManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.List;
+
 import java.util.ArrayList;
 
 public class StudentDashboardFrame extends JFrame {
@@ -25,6 +29,7 @@ public class StudentDashboardFrame extends JFrame {
     private JTable coursesTable;
     private JTable lessonsTable;
     private JTable certificatesTable;
+
     private JTextArea lessonContentArea;
 
     private final String[] COURSE_COLUMNS = {"CourseID", "Title", "InstructorID", "Enrollment", "Progress"};
@@ -32,14 +37,13 @@ public class StudentDashboardFrame extends JFrame {
 
     private int selectedCourseId = -1;
     private int selectedLessonId = -1;
-    private Certificate certificate;
 
     public StudentDashboardFrame(Student student) {
         this.student = student;
-        db = new JsonDatabaseManager();
-        db2 = new CourseJsonDb();
-        certificate = new Certificate(7973,9819);
+        this.db2 = new CourseJsonDb();
+        this.db = new JsonDatabaseManager();
         setupUI();
+
     }
 
     private void setupUI() {
@@ -48,7 +52,7 @@ public class StudentDashboardFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        Border border = BorderFactory.createLineBorder(new Color(35, 65, 204), 2, true);
+        Border border = BorderFactory.createLineBorder(new Color(35, 65, 204),2,true);
 
         // Main layout
         JPanel panel = new JPanel(new BorderLayout());
@@ -186,9 +190,82 @@ public class StudentDashboardFrame extends JFrame {
         certificatesTable.getSelectionModel().addListSelectionListener(e -> {
             int row = certificatesTable.getSelectedRow();
             if (row != -1) {
-                
+
             }
         });
+
+
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        tablePanel.add(new JScrollPane(lessonsTable), BorderLayout.CENTER);
+        tablePanel.setPreferredSize(new Dimension(220, 0));
+        lessonsPanel.add(tablePanel, BorderLayout.WEST);
+
+        lessonContentArea = new JTextArea();
+        lessonContentArea.setLineWrap(true);
+        lessonContentArea.setWrapStyleWord(true);
+        lessonContentArea.setEditable(false);
+        lessonsPanel.add(new JScrollPane(lessonContentArea), BorderLayout.CENTER);
+
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+
+        JButton markCompletedBtn = new JButton("Mark Lesson Completed");
+        markCompletedBtn.addActionListener(e -> markLessonCompleted());
+        buttonsPanel.add(markCompletedBtn);
+
+        JButton startQuizBtn = new JButton("Start Quiz");
+        startQuizBtn.addActionListener(e -> {
+            if (selectedCourseId == -1 || selectedLessonId == -1) {
+                JOptionPane.showMessageDialog(this, "Select a course and a lesson first.");
+                return;
+            }
+            Course course = db2.getCourseById(selectedCourseId);
+            if (course == null) {
+                JOptionPane.showMessageDialog(this, "Course not found.");
+                return;
+            }
+            Lesson lesson = course.getLessonById(selectedLessonId);
+            if (lesson == null) {
+                JOptionPane.showMessageDialog(this, "Lesson not found.");
+                return;
+            }
+            if (lesson.getQuiz() == null) {
+                JOptionPane.showMessageDialog(this, "No quiz for this lesson.");
+                return;
+            }
+
+            QuizManager qm = new QuizManager();
+            int attempts = qm.countAttemptsForStudentQuiz(student.getUserId(), lesson.getQuiz().getQuizId());
+            int max = lesson.getQuiz().getMaxAttempts();
+            if (max > -1 && attempts >= max) {
+                JOptionPane.showMessageDialog(this, "You reached max attempts for this quiz.");
+                return;
+            }
+
+            QuizFrame qf = new QuizFrame(lesson.getQuiz(), student.getUserId());
+            qf.setVisible(true);
+            qf.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                    List attemptsList = (List) qm.getAttemptsForStudentAndQuiz(student.getUserId(), lesson.getQuiz().getQuizId());
+                    if (!attemptsList.isEmpty()) {
+                        org.project.model.QuizAttempt last = (org.project.model.QuizAttempt) attemptsList.get(attemptsList.size() - 1);
+                        if (last.isPassed()) {
+                            student.markLessonCompleted(selectedCourseId, selectedLessonId);
+                            db.updateUser(student);
+                            loadCourses((DefaultTableModel) coursesTable.getModel()); // refresh progress
+                            // If currently in lessons view, refresh lesson table (if needed)
+                            loadLessonsForCourse(selectedCourseId);
+                            JOptionPane.showMessageDialog(null, "Lesson marked as completed (passed quiz).");
+                        }
+                    }
+                }
+            });
+        });
+        buttonsPanel.add(startQuizBtn);
+
+        lessonsPanel.add(buttonsPanel, BorderLayout.SOUTH);
+
+        mainPanel.add(lessonsPanel, "lessons");
     }
 
 //    private void CertificateView(Certificate certificate) {
@@ -295,6 +372,7 @@ public class StudentDashboardFrame extends JFrame {
             return;
         }
 
+
         DefaultTableModel model = (DefaultTableModel) lessonsTable.getModel();
         model.setRowCount(0);
 
@@ -345,18 +423,12 @@ public class StudentDashboardFrame extends JFrame {
             return;
         }
 
-//        if (){
-//            JOptionPane.showMessageDialog(this, "Finish the quiz first!.");
-//            return;
-//        }
-//        else {
         student.markLessonCompleted(selectedCourseId, selectedLessonId);
         db.updateUser(student);
 
         loadCourses((DefaultTableModel) coursesTable.getModel());
 
         JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
-//        }
     }
 
 
