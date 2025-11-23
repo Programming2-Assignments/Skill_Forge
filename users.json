@@ -50,11 +50,86 @@
   },
   {
     "coursesID": [
-      9283
+      9283,
+      7171
     ],
     "userId": "1599",
     "username": "h",
     "email": "h@gmail.com",
+    "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+    "role": "Instructor"
+  },
+  {
+    "enrolledCourses": [
+      9724,
+      5321,
+      6802,
+      9283,
+      7171,
+      6593,
+      3780
+    ],
+    "progress": {
+      "9724": 0,
+      "5321": 100,
+      "6802": 0,
+      "9283": 0,
+      "7171": 100,
+      "6593": 100,
+      "3780": 100
+    },
+    "lessonsPerCourse": {
+      "9724": [],
+      "5321": [
+        1933
+      ],
+      "6802": [],
+      "9283": [],
+      "7171": [
+        7625,
+        1855,
+        3694
+      ],
+      "6593": [
+        7112
+      ],
+      "3780": [
+        135
+      ]
+    },
+    "completedLessons": {
+      "9724": [],
+      "5321": [
+        1933
+      ],
+      "6802": [],
+      "9283": [],
+      "7171": [
+        7625,
+        1855,
+        3694
+      ],
+      "6593": [
+        7112
+      ],
+      "3780": [
+        135
+      ]
+    },
+    "userId": "5067",
+    "username": "Ziad Nasser",
+    "email": "ziad@gmail.com",
+    "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+    "role": "Student"
+  },
+  {
+    "coursesID": [
+      6593,
+      3780
+    ],
+    "userId": "8653",
+    "username": "ziad instructor ",
+    "email": "ziad1@gmail.com",
     "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
     "role": "Instructor"
   }

@@ -11,13 +11,12 @@ public class CourseManager {
 
     private final CourseJsonDb courseDb;
 
-    // Constructor
+
     public CourseManager() {
         this.courseDb = new CourseJsonDb();
     }
 
 
-    // COURSE OPERATIONS
     public Course createCourse(String title, String description, int instructorId) {
         Course c = new Course();
         c.setTitle(title);
@@ -38,8 +37,6 @@ public class CourseManager {
         return courseDb.deleteCourse(courseId);
     }
 
-
-    // LESSON OPERATIONS
     public Lesson addLesson(int courseId, String title, String content) {
         Lesson l = new Lesson();
         l.setTitle(title);
@@ -63,20 +60,6 @@ public class CourseManager {
         return courseDb.deleteLesson(courseId, lessonId);
     }
 
-
-    // STUDENT ENROLLMENT
-    // ENROLL
-    public boolean enrollStudent(int courseId, int studentId) {
-        return courseDb.enrollStudent(courseId, studentId);
-    }
-
-    // UNENROLL
-    public boolean unenrollStudent(int courseId, int studentId) {
-        return courseDb.unenrollStudent(courseId, studentId);
-    }
-
-
-    // COURSE RETRIEVAL
     public Course getCourseById(int id) {
         return courseDb.getCourseById(id);
     }

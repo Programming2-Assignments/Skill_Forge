@@ -1,5 +1,5 @@
 package org.project.Frontend;
-import org.project.Frontend.InstructorDashboardFrame;
+
 import org.project.model.Instructor;
 import org.project.model.Student;
 import org.project.model.User;
@@ -81,6 +81,33 @@ public class LoginFrame extends JFrame {
                 new EmptyBorder(5, 10, 5, 10)
         ));
 
+        char defaultEchoChar = passwordField.getEchoChar();
+
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+        passwordPanel.setBackground(Color.WHITE);
+
+        JButton eyeButton = new JButton("👁");
+        eyeButton.setBorderPainted(false);
+        eyeButton.setFocusPainted(false);
+        eyeButton.setContentAreaFilled(false);
+        eyeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        eyeButton.addActionListener(e -> {
+            if (passwordField.getEchoChar() == 0) {
+                passwordField.setEchoChar(defaultEchoChar);
+                eyeButton.setText("👁");
+            } else {
+                passwordField.setEchoChar((char) 0);
+                eyeButton.setText("👁");
+            }
+        });
+
+        passwordPanel.add(passwordField);
+        passwordPanel.add(Box.createHorizontalStrut(5));
+        passwordPanel.add(eyeButton);
+
+
         loginButton = new JButton("Login");
         loginButton.setFont(new Font("Arial", Font.BOLD, 15));
         loginButton.setForeground(Color.WHITE);
@@ -108,13 +135,14 @@ public class LoginFrame extends JFrame {
 
         signupPanel.add(signupLabel);
         signupPanel.add(signupButton);
+
         formPanel.add(emailLabel);
         formPanel.add(Box.createVerticalStrut(8));
         formPanel.add(emailField);
         formPanel.add(Box.createVerticalStrut(20));
         formPanel.add(passwordLabel);
         formPanel.add(Box.createVerticalStrut(8));
-        formPanel.add(passwordField);
+        formPanel.add(passwordPanel);
         formPanel.add(Box.createVerticalStrut(25));
         formPanel.add(loginButton);
         formPanel.add(Box.createVerticalStrut(15));
@@ -174,6 +202,6 @@ public class LoginFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        SwingUtilities.invokeLater(() -> new LoginFrame());
+        SwingUtilities.invokeLater(LoginFrame::new);
     }
 }
