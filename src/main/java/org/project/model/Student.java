@@ -86,6 +86,19 @@ public class Student extends User {
         return enrolledCourses != null && enrolledCourses.contains(courseId);
     }
 
+    // ------------------- Certificates -------------------
+    public void addCertificate(int couseId) {
+        int studentId = Integer.parseInt(getUserId());
+        Certificate c = new Certificate(studentId,couseId);
+        certificates.add(c);
+    }
+
+    public boolean checkCertificateEligibility(int courseId) {
+        if (calculateProgress(courseId) != 100)
+            return false;
+        return true;
+    }
+
     public ArrayList<Certificate> getCertificates() {
         return certificates;
     }

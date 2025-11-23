@@ -268,7 +268,8 @@ public class InstructorDashboardFrame extends JFrame{
             frame.setVisible(true);
         });
 
-        table.getSelectionModel().addListSelectionListener(e -> {
+        JButton btnManageLesson = new JButton("Delete / Edit Lesson");
+        btnManageLesson.addActionListener(e -> {
             int row = table.getSelectedRow();
             if (row != -1) {
                 int option = JOptionPane.showOptionDialog(
@@ -303,6 +304,7 @@ public class InstructorDashboardFrame extends JFrame{
         JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         southPanel.add(btnAddLesson);
         southPanel.add(btnAddQuiz);
+        southPanel.add(btnManageLesson);
 
         panel.add(lblTitle, BorderLayout.NORTH);
         panel.add(new JScrollPane(table), BorderLayout.CENTER);

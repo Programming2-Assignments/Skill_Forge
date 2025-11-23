@@ -8,14 +8,13 @@ public class Certificate {
     private int certificateId;
     private int studentId;
     private int courseId;
-    private LocalDate issueDate;
-    private static final DateTimeFormatter Formated_date = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private String issueDate;
 
     public Certificate(int studentId, int courseId) {
         this.certificateId = new Random().nextInt(10000);
         this.studentId = studentId;
         this.courseId = courseId;
-        this.issueDate = LocalDate.now();
+        this.issueDate =  setDate();
     }
 
     public int getCertificateId() {
@@ -42,11 +41,18 @@ public class Certificate {
         this.courseId = courseId;
     }
 
-    public LocalDate getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(LocalDate issueDate) {
+    public String setDate(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate now = LocalDate.now();
+        String date = dtf.format(now);
+        return date;
+    }
+
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
 }

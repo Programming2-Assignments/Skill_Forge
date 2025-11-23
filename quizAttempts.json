@@ -1,0 +1,122 @@
+[
+  {
+    "attemptId": "7958",
+    "quizId": "e2421ad7-cebf-404a-96c5-2acb94a32994",
+    "studentId": "9292",
+    "score": 0,
+    "passed": false,
+    "attemptDate": "2025-11-23T17:11:27.604974600"
+  },
+  {
+    "attemptId": "9008",
+    "quizId": "e2421ad7-cebf-404a-96c5-2acb94a32994",
+    "studentId": "9292",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T17:11:45.604628400"
+  },
+  {
+    "attemptId": "9008",
+    "quizId": "e2421ad7-cebf-404a-96c5-2acb94a32994",
+    "studentId": "9292",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T17:11:45.604628400"
+  },
+  {
+    "attemptId": "9712",
+    "quizId": "b3e141c0-b905-491d-93eb-06d3ceda1eb6",
+    "studentId": "9292",
+    "score": 33,
+    "passed": false,
+    "attemptDate": "2025-11-23T18:00:17.520291200"
+  },
+  {
+    "attemptId": "4218",
+    "quizId": "b3e141c0-b905-491d-93eb-06d3ceda1eb6",
+    "studentId": "9292",
+    "score": 66,
+    "passed": true,
+    "attemptDate": "2025-11-23T18:00:38.485403300"
+  },
+  {
+    "attemptId": "724",
+    "quizId": "Q1933",
+    "studentId": "9292",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T18:01:54.154771700"
+  },
+  {
+    "attemptId": "724",
+    "quizId": "Q1933",
+    "studentId": "9292",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T18:01:54.154771700"
+  },
+  {
+    "attemptId": "11",
+    "quizId": "e2421ad7-cebf-404a-96c5-2acb94a32994",
+    "studentId": "184",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T20:36:39.956445600"
+  },
+  {
+    "attemptId": "11",
+    "quizId": "e2421ad7-cebf-404a-96c5-2acb94a32994",
+    "studentId": "184",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T20:36:39.956445600"
+  },
+  {
+    "attemptId": "4254",
+    "quizId": "b3e141c0-b905-491d-93eb-06d3ceda1eb6",
+    "studentId": "184",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T21:33:19.545588900"
+  },
+  {
+    "attemptId": "4254",
+    "quizId": "b3e141c0-b905-491d-93eb-06d3ceda1eb6",
+    "studentId": "184",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T21:33:19.545588900"
+  },
+  {
+    "attemptId": "2240",
+    "quizId": "Q1933",
+    "studentId": "184",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T22:29:37.389394200"
+  },
+  {
+    "attemptId": "2240",
+    "quizId": "Q1933",
+    "studentId": "184",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T22:29:37.389394200"
+  },
+  {
+    "attemptId": "3658",
+    "quizId": "Q1933",
+    "studentId": "184",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T22:30:00.139086600"
+  },
+  {
+    "attemptId": "3658",
+    "quizId": "Q1933",
+    "studentId": "184",
+    "score": 100,
+    "passed": true,
+    "attemptDate": "2025-11-23T22:30:00.139086600"
+  }
+]

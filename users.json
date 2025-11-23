@@ -132,5 +132,103 @@
     "email": "ziad1@gmail.com",
     "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
     "role": "Instructor"
+  },
+  {
+    "enrolledCourses": [
+      3780,
+      6593,
+      7171
+    ],
+    "progress": {
+      "3780": 100,
+      "6593": 100,
+      "7171": 33
+    },
+    "lessonsPerCourse": {
+      "3780": [
+        135
+      ],
+      "6593": [
+        7112
+      ],
+      "7171": [
+        7625,
+        1855,
+        3694
+      ]
+    },
+    "completedLessons": {
+      "3780": [
+        135
+      ],
+      "6593": [
+        7112
+      ],
+      "7171": [
+        1855
+      ]
+    },
+    "certificates": [],
+    "userId": "9292",
+    "username": "Y",
+    "email": "y@.",
+    "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+    "role": "Student"
+  },
+  {
+    "enrolledCourses": [
+      3780,
+      6593,
+      7171
+    ],
+    "progress": {
+      "3780": 100,
+      "6593": 100,
+      "7171": 66
+    },
+    "lessonsPerCourse": {
+      "3780": [
+        135
+      ],
+      "6593": [
+        7112
+      ],
+      "7171": [
+        7625,
+        1855,
+        3694
+      ]
+    },
+    "completedLessons": {
+      "3780": [
+        135
+      ],
+      "6593": [
+        7112
+      ],
+      "7171": [
+        7625,
+        1855
+      ]
+    },
+    "certificates": [
+      {
+        "certificateId": 3989,
+        "studentId": 184,
+        "courseId": 3780,
+        "issueDate": "23/11/2025"
+      },
+      {
+        "certificateId": 9358,
+        "studentId": 184,
+        "courseId": 6593,
+        "issueDate": "23/11/2025"
+      }
+    ],
+    "userId": "184",
+    "username": "youssef",
+    "email": "y@.com",
+    "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+    "role": "Student"
   }
 ]

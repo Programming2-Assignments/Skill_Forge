@@ -4,7 +4,6 @@ import org.project.model.Certificate;
 import org.project.model.Course;
 import org.project.model.Lesson;
 import org.project.model.Student;
-import org.project.model.Course;
 import org.project.storage.CourseJsonDb;
 import org.project.storage.JsonDatabaseManager;
 import org.project.storage.QuizManager;
@@ -15,7 +14,6 @@ import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
 import java.util.List;
 
 import java.util.ArrayList;
@@ -97,8 +95,7 @@ public class StudentDashboardFrame extends JFrame {
         // Setup views
         setupCoursesView();
         setupLessonsView();
-        CertificateView(certificate);
-
+        setupCertificate();
         // Sidebar actions
         viewCoursesBtn.addActionListener(e -> switchView("courses"));
         viewLessonsBtn.addActionListener(e -> {
@@ -109,7 +106,7 @@ public class StudentDashboardFrame extends JFrame {
                 JOptionPane.showMessageDialog(this, "Please select a course from Courses view first.");
             }
         });
-        viewCertificateBtn.addActionListener(e -> switchView("certificate"));
+        viewCertificateBtn.addActionListener(e -> switchView("certificateTable"));
 
         switchView("courses");
     }
@@ -135,14 +132,13 @@ public class StudentDashboardFrame extends JFrame {
         JButton enrollBtn = new JButton("Enroll in Selected Course");
         enrollBtn.addActionListener(e -> enrollSelectedCourse());
         coursesPanel.add(enrollBtn, BorderLayout.SOUTH);
-
+        db.updateUser(student);
         mainPanel.add(coursesPanel, "courses");
     }
 
     private void setupLessonsView() {
         JPanel lessonsPanel = new JPanel(new BorderLayout());
 
-        // Table of lessons
         DefaultTableModel lessonModel = new DefaultTableModel(LESSON_COLUMNS, 0);
         lessonsTable = new JTable(lessonModel);
         lessonsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -161,39 +157,6 @@ public class StudentDashboardFrame extends JFrame {
             }
         });
 
-        lessonsPanel.add(new JScrollPane(lessonsTable), BorderLayout.WEST);
-
-        // Lesson content
-        lessonContentArea = new JTextArea();
-        lessonContentArea.setLineWrap(true);
-        lessonContentArea.setWrapStyleWord(true);
-        lessonContentArea.setEditable(false);
-        lessonsPanel.add(new JScrollPane(lessonContentArea), BorderLayout.CENTER);
-
-        JButton markCompletedBtn = new JButton("Mark Lesson Completed");
-        markCompletedBtn.addActionListener(e -> markLessonCompleted());
-        lessonsPanel.add(markCompletedBtn, BorderLayout.SOUTH);
-
-        mainPanel.add(lessonsPanel, "lessons");
-    }
-
-    private void setupCertificate() {
-        JPanel certificatePanel = new JPanel(new BorderLayout());
-        DefaultTableModel certificatesModel = new DefaultTableModel(new String []{"Course","Issue Date"}, 0);
-
-        for (Certificate c :student.getCertificates()) {
-            certificatesModel.addRow(new Object[]{db2.getCourseById(c.getCourseId()).getTitle(),c.getIssueDate()});
-        }
-
-        certificatesTable = new JTable(certificatesModel);
-
-        certificatesTable.getSelectionModel().addListSelectionListener(e -> {
-            int row = certificatesTable.getSelectedRow();
-            if (row != -1) {
-
-            }
-        });
-
 
         JPanel tablePanel = new JPanel(new BorderLayout());
         tablePanel.add(new JScrollPane(lessonsTable), BorderLayout.CENTER);
@@ -207,10 +170,6 @@ public class StudentDashboardFrame extends JFrame {
         lessonsPanel.add(new JScrollPane(lessonContentArea), BorderLayout.CENTER);
 
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
-
-        JButton markCompletedBtn = new JButton("Mark Lesson Completed");
-        markCompletedBtn.addActionListener(e -> markLessonCompleted());
-        buttonsPanel.add(markCompletedBtn);
 
         JButton startQuizBtn = new JButton("Start Quiz");
         startQuizBtn.addActionListener(e -> {
@@ -256,6 +215,11 @@ public class StudentDashboardFrame extends JFrame {
                             // If currently in lessons view, refresh lesson table (if needed)
                             loadLessonsForCourse(selectedCourseId);
                             JOptionPane.showMessageDialog(null, "Lesson marked as completed (passed quiz).");
+                            if(student.checkCertificateEligibility(selectedCourseId)){
+                                student.addCertificate(selectedCourseId);
+                                JOptionPane.showMessageDialog(null, "Congrats🎉\n You Have finished the course.");
+                                db.updateUser(student);
+                            }
                         }
                     }
                 }
@@ -268,34 +232,39 @@ public class StudentDashboardFrame extends JFrame {
         mainPanel.add(lessonsPanel, "lessons");
     }
 
-//    private void CertificateView(Certificate certificate) {
-//        JPanel certificatePanel = new JPanel();
-//        certificatePanel.setLayout(new GridLayout(3,1,5,5));
-//
-//        String courseName =db2.getCourseById(certificate.getCourseId()).getTitle();
-//
-//        JLabel head = new JLabel("Certificate");
-//        head.setFont(new Font("Arial", Font.ITALIC, 40));
-//        head.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        JLabel studentName = new JLabel("This certificate is awarded to " + student.getUsername());
-//        studentName.setFont(new Font("Arial", Font.BOLD, 20));
-//        studentName.setAlignmentX(Component.CENTER_ALIGNMENT);
-//
-//        JLabel courseNameLbl = new JLabel("For his outstanding performance in " +courseName );
-//        courseNameLbl.setFont(new Font("Arial", Font.BOLD, 22));
-//        courseNameLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
-//
-//
-//        certificatePanel.add(head);
-//        certificatePanel.add(studentName);
-//        certificatePanel.add(courseNameLbl);
-//
-//        mainPanel.add(certificatePanel, "certificate");
-//    }
+    private void setupCertificate() {
+
+        JPanel setupcertificatePanel = new JPanel(new BorderLayout());
+        DefaultTableModel certificatesModel = new DefaultTableModel(new String []{"Course","Course ID","Issue Date"}, 0);
+
+        for (Certificate c :student.getCertificates()) {
+            certificatesModel.addRow(new Object[]{db2.getCourseById(c.getCourseId()).getTitle(),c.getCourseId(),c.getIssueDate()});
+        }
+
+        certificatesTable = new JTable(certificatesModel);
+
+        setupcertificatePanel.add(new JScrollPane(certificatesTable), BorderLayout.CENTER);
+
+        certificatesTable.getSelectionModel().addListSelectionListener(e -> {
+            int row = certificatesTable.getSelectedRow();
+            if (row != -1) {
+                int courseId =(int) certificatesTable.getValueAt(row,1);
+                for(Certificate c :student.getCertificates()){
+                    if(c.getCourseId() == courseId){
+                        CertificateView(c);
+                        switchView("certificate");
+                    }
+                }
+            }
+        });
+
+        mainPanel.add(setupcertificatePanel, "certificateTable");
+
+    }
 
     private void CertificateView(Certificate certificate) {
         JPanel certificatePanel = new JPanel();
-        certificatePanel.setLayout(new GridLayout(1, 0));
+        certificatePanel.setLayout(new BorderLayout(5, 5));
         certificatePanel.setBackground(new Color(255, 248, 230));
 
         String courseName = db2.getCourseById(certificate.getCourseId()).getTitle();
@@ -317,7 +286,7 @@ public class StudentDashboardFrame extends JFrame {
         courseNameLbl.setFont(new Font("Beau Rivage", Font.BOLD, 28));
 
         JLabel meta = new JLabel(
-                "Issued on: " + /*certificate.ge()*/"22-12-2022" +
+                "Issued on: " + certificate.getIssueDate() +
                         "    |   Certificate ID: " + certificate.getCertificateId(),
                 SwingConstants.CENTER
         );
@@ -335,6 +304,7 @@ public class StudentDashboardFrame extends JFrame {
         certificatePanel.add(box, BorderLayout.CENTER);
 
         mainPanel.add(certificatePanel, "certificate");
+        switchView("certificate");
     }
 
 
@@ -416,21 +386,6 @@ public class StudentDashboardFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Enrollment failed.");
         }
     }
-
-    private void markLessonCompleted() {
-        if (selectedLessonId == -1) {
-            JOptionPane.showMessageDialog(this, "Select a lesson first.");
-            return;
-        }
-
-        student.markLessonCompleted(selectedCourseId, selectedLessonId);
-        db.updateUser(student);
-
-        loadCourses((DefaultTableModel) coursesTable.getModel());
-
-        JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
-    }
-
 
     private void handleLogout() {
         int result = JOptionPane.showConfirmDialog(this,
