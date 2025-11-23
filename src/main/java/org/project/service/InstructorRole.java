@@ -2,6 +2,8 @@ package org.project.service;
 import org.project.model.*;
 import org.project.storage.CourseJsonDb;
 import org.project.storage.JsonDatabaseManager;
+import org.project.storage.QuizManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -128,4 +130,94 @@ public class InstructorRole {
     public CourseJsonDb getCdb() {
         return Cdb;
     }
+    // ------------------- ANALYTICS METHODS -------------------
+
+    /**
+     * Returns the average quiz score for all lessons in a course.
+     * Assumes each lesson has at most one quiz.
+     */
+    public double getAverageQuizScoreForCourse(int courseId) {
+        QuizManager quizManager = new QuizManager();
+        List<Course> courses = getCdb().loadCourses().stream()
+                .filter(c -> c.getCourseId() == courseId)
+                .toList();
+
+        double total = 0;
+        int count = 0;
+
+        for (Course course : courses) {
+            for (Lesson lesson : course.getLessons()) {
+                if (lesson.getQuiz() != null) {
+                    String quizId = lesson.getQuiz().getQuizId();
+                    List<QuizAttempt> attempts = quizManager.getAttemptsForQuiz(quizId);
+                    for (QuizAttempt attempt : attempts) {
+                        total += attempt.getScore();
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count > 0 ? total / count : 0;
+    }
+
+
+    /**
+     * Returns the percentage of students who have completed 100% of the course.
+     */
+    public double getCourseCompletionPercentage(int courseId) {
+        ArrayList<Course> courses = Cdb.loadCourses();
+        Course course = null;
+        for (Course c : courses) {
+            if (c.getCourseId() == courseId) {
+                course = c;
+                break;
+            }
+        }
+        if (course == null || course.getStudents().isEmpty()) return 0;
+
+        int completedCount = 0;
+        ArrayList<User> users = Udb.loadUsers();
+
+        for (Integer studentId : course.getStudents()) {
+            for (User user : users) {
+                if (user instanceof Student && user.getUserId().equals(String.valueOf(studentId))) {
+                    Student s = (Student) user;
+                    int totalLessons = course.getLessons().size();
+                    int completedLessons = s.getCompletedLessons().getOrDefault(courseId, new ArrayList<>()).size();
+                    if (totalLessons > 0 && completedLessons == totalLessons) completedCount++;
+                }
+            }
+        }
+        return (completedCount * 100.0) / course.getStudents().size();
+    }
+
+    /**
+     * Returns a map of student name -> number of lessons completed for a given course.
+     */
+    public java.util.Map<String, Integer> getLessonCompletionPerStudent(int courseId) {
+        ArrayList<Course> courses = Cdb.loadCourses();
+        Course course = null;
+        for (Course c : courses) {
+            if (c.getCourseId() == courseId) {
+                course = c;
+                break;
+            }
+        }
+        java.util.Map<String, Integer> result = new java.util.HashMap<>();
+        if (course == null) return result;
+
+        ArrayList<User> users = Udb.loadUsers();
+        for (Integer studentId : course.getStudents()) {
+            for (User user : users) {
+                if (user instanceof Student && user.getUserId().equals(String.valueOf(studentId))) {
+                    Student s = (Student) user;
+                    int completedLessons = s.getCompletedLessons().getOrDefault(courseId, new ArrayList<>()).size();
+                    result.put(s.getUsername(), completedLessons);
+                }
+            }
+        }
+        return result;
+    }
+
 }

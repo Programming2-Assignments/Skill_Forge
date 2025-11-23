@@ -32,4 +32,10 @@ public class QuizManager {
     public List<QuizAttempt> getAllAttempts() {
         return db.loadQuizAttempts();
     }
+
+    public List<QuizAttempt> getAttemptsForQuiz(String quizId) {
+        return db.loadQuizAttempts().stream()
+                .filter(a -> a.getQuizId().equals(quizId))
+                .collect(Collectors.toList());
+    }
 }

@@ -6,7 +6,6 @@ import org.project.service.InstructorRole;
 import org.project.model.Lesson;
 import org.project.model.Student;
 
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -68,14 +67,20 @@ public class InstructorDashboardFrame extends JFrame{
         JButton createCourseButton = new JButton("Create Course");
         JButton manageCourseButton = new JButton("Manage My Courses");
         JButton viewEnrolledStudentsButton = new JButton("View Enrolled Students");
+        JButton StudentsInsights = new JButton("Insights");
+        JButton logoutButton = new JButton("Logout");
 
         createCourseButton.addActionListener(e -> openCreateCourseView());
         manageCourseButton.addActionListener(e -> openManageCoursesView());
         viewEnrolledStudentsButton.addActionListener(e -> openViewStudentsView());
+        StudentsInsights.addActionListener(e -> openInsightsView());
+        logoutButton.addActionListener(e -> handleLogout());
 
         buttonPanel.add(createCourseButton);
         buttonPanel.add(manageCourseButton);
         buttonPanel.add(viewEnrolledStudentsButton);
+        buttonPanel.add(StudentsInsights);
+        buttonPanel.add(logoutButton);
 
         add(buttonPanel, BorderLayout.WEST);
     }
@@ -94,7 +99,7 @@ public class InstructorDashboardFrame extends JFrame{
         mainPanel.repaint();
     }
 
-
+    //          CREATE COURSE
 
     private void openCreateCourseView() {
 
@@ -149,11 +154,16 @@ public class InstructorDashboardFrame extends JFrame{
         setMainPanel(panel);
     }
 
+    //          MANAGE COURSES
 
     private void openManageCoursesView() {
         JPanel panel = new JPanel(new BorderLayout());
 
-
+        JLabel note = new JLabel("TO EDIT/DELETE COURSE➡️ RIGHT CLICK           TO MANAGE LESSONS➡️ LEFT CLICK");
+        note.setFont(new Font("Arial", Font.BOLD, 10));
+        JLabel lblTitle = new JLabel("Manage My Courses");
+        lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
+        lblTitle.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         List<Course> courses = instructorService.getCdb().loadCourses().stream()
                 .filter(c -> c.getInstructorId()==Integer.parseInt(instructor.getUserId()))
@@ -168,7 +178,7 @@ public class InstructorDashboardFrame extends JFrame{
 
         JTable table = new JTable(model);
 
-//
+
 
         table.addMouseListener(new MouseAdapter() {
                                    @Override
@@ -213,14 +223,14 @@ public class InstructorDashboardFrame extends JFrame{
                                }
         );
 
-
+        panel.add(lblTitle, BorderLayout.NORTH);
         panel.add(new JScrollPane(table), BorderLayout.CENTER);
-
+        panel.add(note, BorderLayout.SOUTH);
 
         setMainPanel(panel);
     }
 
-
+    //           LESSONS MANAGEMENT PANEL
 
     private void openManageLessonsView(String courseId) {
         JPanel panel = new JPanel(new BorderLayout());
@@ -313,7 +323,7 @@ public class InstructorDashboardFrame extends JFrame{
         setMainPanel(panel);
     }
 
-
+    //           VIEW ENROLLED STUDENTS
 
     private void openViewStudentsView() {
 
@@ -353,6 +363,72 @@ public class InstructorDashboardFrame extends JFrame{
 
         setMainPanel(panel);
     }
+    private void openInsightsView() {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JLabel lblTitle = new JLabel("Insights");
+        lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
+        lblTitle.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Table of Courses
+        List<Course> courses = instructorService.getCdb().loadCourses().stream()
+                .filter(c -> c.getInstructorId() == Integer.parseInt(instructor.getUserId()))
+                .collect(Collectors.toList());
+
+        String[] cols = {"Course ID", "Title", "Description"};
+        DefaultTableModel model = new DefaultTableModel(cols, 0);
+        for (Course c : courses) {
+            model.addRow(new Object[]{c.getCourseId(), c.getTitle(), c.getDescription()});
+        }
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Bottom panel with buttons
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JButton avgQuizBtn = new JButton("Average Quiz per Course");
+        JButton completionBtn = new JButton("Course Completion %");
+        JButton lessonCompletionBtn = new JButton("Lesson Completion per Student");
+
+        bottomPanel.add(avgQuizBtn);
+        bottomPanel.add(completionBtn);
+        bottomPanel.add(lessonCompletionBtn);
+
+        // Button actions
+        avgQuizBtn.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if (row == -1) return;
+            int courseId = (int) table.getValueAt(row, 0);
+            ChartFrame chart = new ChartFrame("Average Quiz Score", "Lesson", "Score");
+            chart.plotCourseAverageQuiz(courseId, instructorService);
+            chart.setVisible(true);
+        });
+
+        completionBtn.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if (row == -1) return;
+            int courseId = (int) table.getValueAt(row, 0);
+            ChartFrame chart = new ChartFrame("Course Completion %", "Student", "Completion %");
+            chart.plotCourseCompletion(courseId, instructorService);
+            chart.setVisible(true);
+        });
+
+        lessonCompletionBtn.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if (row == -1) return;
+            int courseId = (int) table.getValueAt(row, 0);
+            ChartFrame chart = new ChartFrame("Lesson Completion per Student", "Student", "Lessons Completed");
+            chart.plotLessonCompletion(courseId, instructorService);
+            chart.setVisible(true);
+        });
+
+        panel.add(lblTitle, BorderLayout.NORTH);
+        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(bottomPanel, BorderLayout.SOUTH);
+
+        setMainPanel(panel);
+    }
+
 
     private void handleLogout() {
         int result = JOptionPane.showConfirmDialog(this,

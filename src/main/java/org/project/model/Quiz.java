@@ -1,5 +1,6 @@
 package org.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Quiz {
@@ -8,6 +9,8 @@ public class Quiz {
     private List<Question> questions;
     private int passScore = 60;
     private int maxAttempts = -1;
+    private ArrayList<QuizAttempt> attempts;
+
 
     public Quiz() {}
 
@@ -17,6 +20,7 @@ public class Quiz {
         this.questions = questions;
         this.passScore = passScore;
         this.maxAttempts = maxAttempts;
+        this.attempts = new ArrayList<>();
     }
 
     public int calculateScore(List<Integer> chosenAnswers) {
@@ -70,4 +74,11 @@ public class Quiz {
         this.maxAttempts = maxAttempts;
     }
 
+    public ArrayList<QuizAttempt> getAttempts() {
+        return attempts;
+    }
+
+    public void addAttempt(QuizAttempt attempt) {
+        attempts.add(attempt);
+    }
 }

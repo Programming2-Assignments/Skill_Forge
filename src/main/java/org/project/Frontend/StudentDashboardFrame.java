@@ -10,12 +10,10 @@ import org.project.storage.QuizManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import java.awt.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
-
 import java.util.ArrayList;
 
 public class StudentDashboardFrame extends JFrame {
@@ -41,7 +39,6 @@ public class StudentDashboardFrame extends JFrame {
         this.db2 = new CourseJsonDb();
         this.db = new JsonDatabaseManager();
         setupUI();
-
     }
 
     private void setupUI() {
@@ -50,7 +47,7 @@ public class StudentDashboardFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        Border border = BorderFactory.createLineBorder(new Color(35, 65, 204),2,true);
+        Border border = BorderFactory.createLineBorder(new Color(35, 65, 204), 2, true);
 
         // Main layout
         JPanel panel = new JPanel(new BorderLayout());
@@ -139,6 +136,7 @@ public class StudentDashboardFrame extends JFrame {
     private void setupLessonsView() {
         JPanel lessonsPanel = new JPanel(new BorderLayout());
 
+        // Table of lessons
         DefaultTableModel lessonModel = new DefaultTableModel(LESSON_COLUMNS, 0);
         lessonsTable = new JTable(lessonModel);
         lessonsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -341,7 +339,6 @@ public class StudentDashboardFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "You are not enrolled in this course.");
             return;
         }
-
 
         DefaultTableModel model = (DefaultTableModel) lessonsTable.getModel();
         model.setRowCount(0);
