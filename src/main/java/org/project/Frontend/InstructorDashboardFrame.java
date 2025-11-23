@@ -66,17 +66,14 @@ public class InstructorDashboardFrame extends JFrame{
         JButton createCourseButton = new JButton("Create Course");
         JButton manageCourseButton = new JButton("Manage My Courses");
         JButton viewEnrolledStudentsButton = new JButton("View Enrolled Students");
-        JButton logoutButton = new JButton("Logout");
 
         createCourseButton.addActionListener(e -> openCreateCourseView());
         manageCourseButton.addActionListener(e -> openManageCoursesView());
         viewEnrolledStudentsButton.addActionListener(e -> openViewStudentsView());
-        logoutButton.addActionListener(e -> handleLogout());
 
         buttonPanel.add(createCourseButton);
         buttonPanel.add(manageCourseButton);
         buttonPanel.add(viewEnrolledStudentsButton);
-        buttonPanel.add(logoutButton);
 
         add(buttonPanel, BorderLayout.WEST);
     }

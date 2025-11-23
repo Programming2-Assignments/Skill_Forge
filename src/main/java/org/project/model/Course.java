@@ -10,13 +10,8 @@ public class Course {
     private int instructorId;
     private List<Lesson> lessons;
     private List<Integer> students;
-<<<<<<< HEAD
     private int NoOfChecked;
     private int NoOfLesson;
-=======
-    private int NoOfLesson; // old
-    private int NoOfChecked; // old
->>>>>>> origin/Moamen
 
     public Course() {
         this.lessons = new ArrayList<>();

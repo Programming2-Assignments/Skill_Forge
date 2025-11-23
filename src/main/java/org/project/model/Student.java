@@ -8,7 +8,8 @@ public class Student extends User {
     private ArrayList<Integer> enrolledCourses;
     private Map<Integer, Integer> progress; // courseId -> progress %
     private Map<Integer, ArrayList<Integer>> lessonsPerCourse; // courseId -> all lesson IDs
-    private Map<Integer, ArrayList<Integer>> completedLessons; // courseId -> completed lesson IDs
+    private Map<Integer, ArrayList<Integer>> completedLessons;// courseId -> completed lesson IDs
+    private ArrayList<Certificate> certificates;//key -->courseId   value-->Certificate
 
     public Student(String userId, String username, String email, String passwordHash) {
         super(userId, username, email, passwordHash, "Student");
@@ -16,6 +17,7 @@ public class Student extends User {
         this.progress = new HashMap<>();
         this.lessonsPerCourse = new HashMap<>();
         this.completedLessons = new HashMap<>();
+        this.certificates = new ArrayList();
     }
 
     // ------------------- Enrolled Courses -------------------
@@ -44,8 +46,8 @@ public class Student extends User {
         return lessonsPerCourse;
     }
 
-    public void setLessonsForCourse(int courseId, ArrayList<Integer> lessons) {
-        lessonsPerCourse.put(courseId, lessons);
+    public void setLessonsForCourse(int courseId, ArrayList<Integer> lessonsIds) {
+        lessonsPerCourse.put(courseId, lessonsIds);
         completedLessons.putIfAbsent(courseId, new ArrayList<>());
     }
 
@@ -82,5 +84,9 @@ public class Student extends User {
     // ------------------- Utility -------------------
     public boolean hasEnrolledInCourse(int courseId) {
         return enrolledCourses != null && enrolledCourses.contains(courseId);
+    }
+
+    public ArrayList<Certificate> getCertificates() {
+        return certificates;
     }
 }

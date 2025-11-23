@@ -1,6 +1,7 @@
 
 package org.project.Frontend;
 
+import org.project.model.Certificate;
 import org.project.model.Course;
 import org.project.model.Lesson;
 import org.project.model.Student;
@@ -23,6 +24,7 @@ public class StudentDashboardFrame extends JFrame {
     private JPanel mainPanel;
     private JTable coursesTable;
     private JTable lessonsTable;
+    private JTable certificatesTable;
     private JTextArea lessonContentArea;
 
     private final String[] COURSE_COLUMNS = {"CourseID", "Title", "InstructorID", "Enrollment", "Progress"};
@@ -30,11 +32,13 @@ public class StudentDashboardFrame extends JFrame {
 
     private int selectedCourseId = -1;
     private int selectedLessonId = -1;
+    private Certificate certificate;
 
     public StudentDashboardFrame(Student student) {
         this.student = student;
         db = new JsonDatabaseManager();
         db2 = new CourseJsonDb();
+        certificate = new Certificate(7973,9819);
         setupUI();
     }
 
@@ -73,8 +77,10 @@ public class StudentDashboardFrame extends JFrame {
 
         JButton viewCoursesBtn = new JButton("View Courses");
         JButton viewLessonsBtn = new JButton("View Lessons");
+        JButton viewCertificateBtn = new JButton("View Certificate");
         sidebar.add(viewCoursesBtn);
         sidebar.add(viewLessonsBtn);
+        sidebar.add(viewCertificateBtn);
         panel.add(sidebar, BorderLayout.WEST);
 
         // MAIN PANEL
@@ -87,6 +93,7 @@ public class StudentDashboardFrame extends JFrame {
         // Setup views
         setupCoursesView();
         setupLessonsView();
+        CertificateView(certificate);
 
         // Sidebar actions
         viewCoursesBtn.addActionListener(e -> switchView("courses"));
@@ -98,6 +105,7 @@ public class StudentDashboardFrame extends JFrame {
                 JOptionPane.showMessageDialog(this, "Please select a course from Courses view first.");
             }
         });
+        viewCertificateBtn.addActionListener(e -> switchView("certificate"));
 
         switchView("courses");
     }
@@ -164,6 +172,94 @@ public class StudentDashboardFrame extends JFrame {
 
         mainPanel.add(lessonsPanel, "lessons");
     }
+
+    private void setupCertificate() {
+        JPanel certificatePanel = new JPanel(new BorderLayout());
+        DefaultTableModel certificatesModel = new DefaultTableModel(new String []{"Course","Issue Date"}, 0);
+
+        for (Certificate c :student.getCertificates()) {
+            certificatesModel.addRow(new Object[]{db2.getCourseById(c.getCourseId()).getTitle(),c.getIssueDate()});
+        }
+
+        certificatesTable = new JTable(certificatesModel);
+
+        certificatesTable.getSelectionModel().addListSelectionListener(e -> {
+            int row = certificatesTable.getSelectedRow();
+            if (row != -1) {
+                
+            }
+        });
+    }
+
+//    private void CertificateView(Certificate certificate) {
+//        JPanel certificatePanel = new JPanel();
+//        certificatePanel.setLayout(new GridLayout(3,1,5,5));
+//
+//        String courseName =db2.getCourseById(certificate.getCourseId()).getTitle();
+//
+//        JLabel head = new JLabel("Certificate");
+//        head.setFont(new Font("Arial", Font.ITALIC, 40));
+//        head.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        JLabel studentName = new JLabel("This certificate is awarded to " + student.getUsername());
+//        studentName.setFont(new Font("Arial", Font.BOLD, 20));
+//        studentName.setAlignmentX(Component.CENTER_ALIGNMENT);
+//
+//        JLabel courseNameLbl = new JLabel("For his outstanding performance in " +courseName );
+//        courseNameLbl.setFont(new Font("Arial", Font.BOLD, 22));
+//        courseNameLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+//
+//
+//        certificatePanel.add(head);
+//        certificatePanel.add(studentName);
+//        certificatePanel.add(courseNameLbl);
+//
+//        mainPanel.add(certificatePanel, "certificate");
+//    }
+
+    private void CertificateView(Certificate certificate) {
+        JPanel certificatePanel = new JPanel();
+        certificatePanel.setLayout(new GridLayout(1, 0));
+        certificatePanel.setBackground(new Color(255, 248, 230));
+
+        String courseName = db2.getCourseById(certificate.getCourseId()).getTitle();
+
+        certificatePanel.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(new Color(180, 140, 80), 8),
+                        BorderFactory.createEmptyBorder(40, 40, 40, 40)
+                )
+        );
+
+        JLabel title = new JLabel("Certificate of Completion", SwingConstants.CENTER);
+        title.setFont(new Font("Manufacturing Consent", Font.ITALIC, 42));
+
+        JLabel awardedLabel = new JLabel(student.getUsername()+" is officially awarded this certificate", SwingConstants.CENTER);
+        awardedLabel.setFont(new Font("Beau Rivage", Font.BOLD, 32));
+
+        JLabel courseNameLbl = new JLabel("For successful completion of: "+courseName , SwingConstants.CENTER);
+        courseNameLbl.setFont(new Font("Beau Rivage", Font.BOLD, 28));
+
+        JLabel meta = new JLabel(
+                "Issued on: " + /*certificate.ge()*/"22-12-2022" +
+                        "    |   Certificate ID: " + certificate.getCertificateId(),
+                SwingConstants.CENTER
+        );
+        meta.setFont(new Font("Beau Rivage", Font.PLAIN, 16));
+
+        Box box = Box.createVerticalBox();
+        box.add(title);
+        box.add(Box.createVerticalStrut(40));
+        box.add(awardedLabel);
+        box.add(Box.createVerticalStrut(30));
+        box.add(courseNameLbl);
+        box.add(Box.createVerticalStrut(20));
+        box.add(meta);
+
+        certificatePanel.add(box, BorderLayout.CENTER);
+
+        mainPanel.add(certificatePanel, "certificate");
+    }
+
 
     private void switchView(String viewName) {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
@@ -249,12 +345,18 @@ public class StudentDashboardFrame extends JFrame {
             return;
         }
 
+//        if (){
+//            JOptionPane.showMessageDialog(this, "Finish the quiz first!.");
+//            return;
+//        }
+//        else {
         student.markLessonCompleted(selectedCourseId, selectedLessonId);
         db.updateUser(student);
 
         loadCourses((DefaultTableModel) coursesTable.getModel());
 
         JOptionPane.showMessageDialog(this, "Lesson marked as completed!");
+//        }
     }
 
 
