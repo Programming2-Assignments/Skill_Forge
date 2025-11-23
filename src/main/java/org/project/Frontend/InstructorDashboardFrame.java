@@ -178,7 +178,7 @@ public class InstructorDashboardFrame extends JFrame{
 
         JTable table = new JTable(model);
 
-
+//
 
         table.addMouseListener(new MouseAdapter() {
                                    @Override
@@ -428,7 +428,6 @@ public class InstructorDashboardFrame extends JFrame{
 
         setMainPanel(panel);
     }
-
 
     private void handleLogout() {
         int result = JOptionPane.showConfirmDialog(this,
