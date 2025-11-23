@@ -1,5 +1,6 @@
 package org.project.storage;
 import com.google.gson.*;
+import org.project.model.QuizAttempt;
 import org.project.model.Student;
 import org.project.model.Instructor;
 import org.project.model.User;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 public class JsonDatabaseManager {
     private static final String USERS_FILE = "users.json";
+    private static final String QUIZ_ATTEMPTS_FILE = "quizAttempts.json";
     private Gson gson;
 
     public JsonDatabaseManager() {
@@ -99,5 +101,28 @@ public class JsonDatabaseManager {
         }
         return false;
     }
+    public ArrayList<QuizAttempt> loadQuizAttempts() {
+        ArrayList<QuizAttempt> attempts = new ArrayList<>();
+        File file = new File(QUIZ_ATTEMPTS_FILE);
+        if (!file.exists()) return attempts;
 
+        try (FileReader reader = new FileReader(QUIZ_ATTEMPTS_FILE)) {
+            JsonElement el = JsonParser.parseReader(reader);
+            if (!el.isJsonArray()) return attempts;
+            JsonArray arr = el.getAsJsonArray();
+            for (JsonElement e : arr) {
+                QuizAttempt a = gson.fromJson(e, QuizAttempt.class);
+                attempts.add(a);
+            }
+        } catch (Exception ex) { ex.printStackTrace(); }
+        return attempts;
+    }
+
+    public void saveQuizAttempts(ArrayList<QuizAttempt> attempts) {
+        try (FileWriter writer = new FileWriter(QUIZ_ATTEMPTS_FILE)) {
+            gson.toJson(attempts, writer);
+        } catch (Exception e) { e.printStackTrace(); }
+    }
 }
+
+

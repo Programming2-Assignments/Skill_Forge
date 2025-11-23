@@ -5,6 +5,7 @@ import org.project.model.Lesson;
 import org.project.model.Student;
 import org.project.storage.CourseJsonDb;
 import org.project.storage.JsonDatabaseManager;
+import org.project.storage.QuizManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,7 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 public class StudentDashboardFrame extends JFrame {
     private JsonDatabaseManager db;
@@ -45,10 +47,8 @@ public class StudentDashboardFrame extends JFrame {
 
         Border border = BorderFactory.createLineBorder(new Color(35, 65, 204), 2, true);
 
-        // Main layout
         JPanel panel = new JPanel(new BorderLayout());
 
-        // HEADER
         JPanel header = new JPanel(new BorderLayout());
         JLabel lblTitle = new JLabel("Student Dashboard – Welcome, " + student.getUsername());
         lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
@@ -63,7 +63,6 @@ public class StudentDashboardFrame extends JFrame {
 
         panel.add(header, BorderLayout.NORTH);
 
-        // SIDEBAR
         JPanel sidebar = new JPanel();
         sidebar.setLayout(new GridLayout(10, 1, 5, 5));
         sidebar.setPreferredSize(new Dimension(200, 500));
@@ -76,18 +75,15 @@ public class StudentDashboardFrame extends JFrame {
         sidebar.add(viewLessonsBtn);
         panel.add(sidebar, BorderLayout.WEST);
 
-        // MAIN PANEL
         mainPanel = new JPanel(new CardLayout());
         panel.add(mainPanel, BorderLayout.CENTER);
 
         add(panel);
         setVisible(true);
 
-        // Setup views
         setupCoursesView();
         setupLessonsView();
 
-        // Sidebar actions
         viewCoursesBtn.addActionListener(e -> switchView("courses"));
         viewLessonsBtn.addActionListener(e -> {
             if (selectedCourseId != -1) {
@@ -129,7 +125,6 @@ public class StudentDashboardFrame extends JFrame {
     private void setupLessonsView() {
         JPanel lessonsPanel = new JPanel(new BorderLayout());
 
-        // Table of lessons
         DefaultTableModel lessonModel = new DefaultTableModel(LESSON_COLUMNS, 0);
         lessonsTable = new JTable(lessonModel);
         lessonsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -148,21 +143,80 @@ public class StudentDashboardFrame extends JFrame {
             }
         });
 
-        lessonsPanel.add(new JScrollPane(lessonsTable), BorderLayout.WEST);
 
-        // Lesson content
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        tablePanel.add(new JScrollPane(lessonsTable), BorderLayout.CENTER);
+        tablePanel.setPreferredSize(new Dimension(220, 0));
+        lessonsPanel.add(tablePanel, BorderLayout.WEST);
+
         lessonContentArea = new JTextArea();
         lessonContentArea.setLineWrap(true);
         lessonContentArea.setWrapStyleWord(true);
         lessonContentArea.setEditable(false);
         lessonsPanel.add(new JScrollPane(lessonContentArea), BorderLayout.CENTER);
 
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+
         JButton markCompletedBtn = new JButton("Mark Lesson Completed");
         markCompletedBtn.addActionListener(e -> markLessonCompleted());
-        lessonsPanel.add(markCompletedBtn, BorderLayout.SOUTH);
+        buttonsPanel.add(markCompletedBtn);
+
+        JButton startQuizBtn = new JButton("Start Quiz");
+        startQuizBtn.addActionListener(e -> {
+            if (selectedCourseId == -1 || selectedLessonId == -1) {
+                JOptionPane.showMessageDialog(this, "Select a course and a lesson first.");
+                return;
+            }
+            Course course = db2.getCourseById(selectedCourseId);
+            if (course == null) {
+                JOptionPane.showMessageDialog(this, "Course not found.");
+                return;
+            }
+            Lesson lesson = course.getLessonById(selectedLessonId);
+            if (lesson == null) {
+                JOptionPane.showMessageDialog(this, "Lesson not found.");
+                return;
+            }
+            if (lesson.getQuiz() == null) {
+                JOptionPane.showMessageDialog(this, "No quiz for this lesson.");
+                return;
+            }
+
+            QuizManager qm = new QuizManager();
+            int attempts = qm.countAttemptsForStudentQuiz(student.getUserId(), lesson.getQuiz().getQuizId());
+            int max = lesson.getQuiz().getMaxAttempts();
+            if (max > -1 && attempts >= max) {
+                JOptionPane.showMessageDialog(this, "You reached max attempts for this quiz.");
+                return;
+            }
+
+            QuizFrame qf = new QuizFrame(lesson.getQuiz(), student.getUserId());
+            qf.setVisible(true);
+            qf.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                    List attemptsList = (List) qm.getAttemptsForStudentAndQuiz(student.getUserId(), lesson.getQuiz().getQuizId());
+                    if (!attemptsList.isEmpty()) {
+                        org.project.model.QuizAttempt last = (org.project.model.QuizAttempt) attemptsList.get(attemptsList.size() - 1);
+                        if (last.isPassed()) {
+                            student.markLessonCompleted(selectedCourseId, selectedLessonId);
+                            db.updateUser(student);
+                            loadCourses((DefaultTableModel) coursesTable.getModel()); // refresh progress
+                            // If currently in lessons view, refresh lesson table (if needed)
+                            loadLessonsForCourse(selectedCourseId);
+                            JOptionPane.showMessageDialog(null, "Lesson marked as completed (passed quiz).");
+                        }
+                    }
+                }
+            });
+        });
+        buttonsPanel.add(startQuizBtn);
+
+        lessonsPanel.add(buttonsPanel, BorderLayout.SOUTH);
 
         mainPanel.add(lessonsPanel, "lessons");
     }
+
 
     private void switchView(String viewName) {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
@@ -191,7 +245,6 @@ public class StudentDashboardFrame extends JFrame {
         Course course = db2.getCourseById(courseId);
         if (course == null) return;
 
-        // Get lesson IDs from student data (lessonsPerCourse) to ensure only assigned lessons
         ArrayList<Integer> lessonIds = student.getLessonsPerCourse().get(courseId);
         if (lessonIds == null) {
             JOptionPane.showMessageDialog(this, "You are not enrolled in this course.");

@@ -5,6 +5,7 @@ public class Lesson {
     private String title;
     private String content;
     private boolean check;
+    private Quiz quiz;
 
     // Constructors
     public Lesson() {
@@ -24,7 +25,7 @@ public class Lesson {
         this.check = check;
     }
 
-    // Getters and Setters
+
     public int getLessonId() {
         return lessonId;
     }
@@ -48,6 +49,11 @@ public class Lesson {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public Quiz getQuiz() { return quiz; }
+
+    public void setQuiz(Quiz quiz) { this.quiz = quiz; }
+
 
     @Override
     public String toString() {
