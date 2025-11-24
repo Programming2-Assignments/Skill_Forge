@@ -9,19 +9,14 @@ import java.awt.*;
 
 public class AdminDashboardPanel extends JPanel {
 
-    private final MainAppWindow parent;
-    private final AdminService adminService;
-
     public AdminDashboardPanel(MainAppWindow parent, AdminService adminService) {
-        this.parent = parent;
-        this.adminService = adminService;
 
         setLayout(new BorderLayout());
         setOpaque(false);
 
-        // ---------- TITLE ----------
+        // TITLE
         JLabel title = new JLabel("Admin Dashboard");
-        title.setFont(new Font("Segoe UI", Font.BOLD, 34));   // FIXED FONT
+        title.setFont(new Font("Segue UI", Font.BOLD, 34));   // FIXED FONT
         title.setForeground(Color.WHITE);
 
         JPanel titleWrapper = new JPanel(new BorderLayout());
@@ -31,7 +26,7 @@ public class AdminDashboardPanel extends JPanel {
 
         add(titleWrapper, BorderLayout.NORTH);
 
-        // ---------- CENTER ----------
+        // CENTER
         JPanel center = new JPanel(new GridBagLayout());
         center.setOpaque(false);
         center.setBorder(new EmptyBorder(10, 10, 40, 10));
@@ -61,8 +56,7 @@ public class AdminDashboardPanel extends JPanel {
         btn.setPreferredSize(new Dimension(300, 55));
         btn.setFocusPainted(false);
 
-        btn.putClientProperty(FlatClientProperties.STYLE, ""
-                + "background: #FFFFFF;"
+        btn.putClientProperty(FlatClientProperties.STYLE, "background: #FFFFFF;"
                 + "foreground: #000000;"
                 + "hoverBackground: #EDEDED;"
                 + "pressedBackground: #DCDCDC;"
@@ -70,15 +64,10 @@ public class AdminDashboardPanel extends JPanel {
                 + "borderWidth: 0;"
         );
 
-        btn.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        btn.setFont(new Font("Segue UI", Font.BOLD, 16));
         btn.setBorder(new EmptyBorder(10, 20, 10, 20));
 
         return btn;
     }
 
-    // ⭐ IMPORTANT FIX: guarantees buttons never disappear
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(900, 650);
-    }
 }

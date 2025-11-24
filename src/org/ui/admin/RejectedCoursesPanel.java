@@ -25,9 +25,7 @@ public class RejectedCoursesPanel extends JPanel {
         add(createGlassTable(), BorderLayout.CENTER);
     }
 
-    // ===============================
-    //          HEADER
-    // ===============================
+    // HEADER
     private Component createHeader() {
         JPanel header = new JPanel(new BorderLayout());
         header.setOpaque(false);
@@ -35,15 +33,13 @@ public class RejectedCoursesPanel extends JPanel {
 
         JLabel title = new JLabel("Rejected Courses");
         title.setForeground(Color.WHITE);
-        title.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        title.setFont(new Font("Segue UI", Font.BOLD, 28));
 
         header.add(title, BorderLayout.WEST);
         return header;
     }
 
-    // ===============================
-    //       GLASS PANEL + TABLE
-    // ===============================
+    // GLASS PANEL + TABLE
     private Component createGlassTable() {
         GlassPanel glass = new GlassPanel(22);
         glass.setLayout(new BorderLayout());
@@ -62,7 +58,7 @@ public class RejectedCoursesPanel extends JPanel {
         header.setOpaque(true);
         header.setForeground(Color.WHITE);
         header.setBackground(new Color(45, 45, 52));
-        header.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        header.setFont(new Font("Segue UI", Font.BOLD, 14));
 
         // Table body styling
         table.setForeground(Color.WHITE);
@@ -90,4 +86,20 @@ public class RejectedCoursesPanel extends JPanel {
         glass.add(scroll, BorderLayout.CENTER);
         return glass;
     }
+
+    public void reload() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.setRowCount(0);
+        ArrayList<Course> list = adminService.getRejectedCourses();
+        for (Course c : list) {
+            model.addRow(new Object[]{
+                    c.getCourseId(),
+                    c.getTitle(),
+                    c.getInstructorId()
+            });
+        }
+    }
+
+
+
 }

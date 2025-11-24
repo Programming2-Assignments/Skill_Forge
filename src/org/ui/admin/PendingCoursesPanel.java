@@ -13,9 +13,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 
-/**
- * Ultra-modern pending courses panel using glass style + soft white buttons.
- */
 public class PendingCoursesPanel extends JPanel {
 
     private final MainAppWindow parent;
@@ -32,28 +29,12 @@ public class PendingCoursesPanel extends JPanel {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        // ============================
-        //         TOP BAR
-        // ============================
-        JPanel topBar = new JPanel(new BorderLayout());
-        topBar.setOpaque(false);
-        topBar.setBorder(new EmptyBorder(0, 0, 20, 0));
-
-        ModernWhiteButton backBtn = new ModernWhiteButton("⬅  Back");
-        backBtn.setPreferredSize(new Dimension(120, 42));
-        backBtn.addActionListener(e -> parent.showDashboard());
-        topBar.add(backBtn, BorderLayout.WEST);
-
-        JLabel title = new JLabel("Pending Courses");
-        title.setForeground(Color.WHITE);
-        title.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        topBar.add(title, BorderLayout.CENTER);
+        // TOP BAR
+        JPanel topBar = getJPanel();
 
         add(topBar, BorderLayout.NORTH);
 
-        // ============================
-        //     GLASS WRAPPED TABLE
-        // ============================
+        // GLASS WRAPPED TABLE
         GlassPanel glass = new GlassPanel(22);
         glass.setLayout(new BorderLayout());
         glass.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -71,16 +52,31 @@ public class PendingCoursesPanel extends JPanel {
         add(glass, BorderLayout.CENTER);
     }
 
-    // ============================
-    //        TABLE DESIGN
-    // ============================
+    private static JPanel getJPanel() {
+        JPanel topBar = new JPanel(new BorderLayout());
+        topBar.setOpaque(false);
+        topBar.setBorder(new EmptyBorder(0, 0, 20, 0));
+
+//        ModernWhiteButton backBtn = new ModernWhiteButton("Back");
+//        backBtn.setPreferredSize(new Dimension(120, 42));
+//        backBtn.addActionListener(e -> parent.showDashboard());
+//        topBar.add(backBtn, BorderLayout.WEST);
+
+        JLabel title = new JLabel("Pending Courses");
+        title.setForeground(Color.WHITE);
+        title.setFont(new Font("Segue UI", Font.BOLD, 28));
+        topBar.add(title, BorderLayout.CENTER);
+        return topBar;
+    }
+
+    // TABLE DESIGN
     private void setupTable() {
         model = new DefaultTableModel(
                 new Object[]{"ID", "Title", "Instructor", "", ""}, 0
         ) {
             @Override
             public boolean isCellEditable(int row, int col) {
-                return col == 3 || col == 4; // only Approve/Reject buttons
+                return col == 3 || col == 4; // Approve/Reject buttons
             }
         };
 
@@ -93,7 +89,7 @@ public class PendingCoursesPanel extends JPanel {
         JTableHeader header = table.getTableHeader();
         header.setForeground(Color.WHITE);
         header.setBackground(new Color(40, 40, 48));
-        header.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        header.setFont(new Font("Segue UI", Font.BOLD, 14));
 
         table.setForeground(Color.WHITE);
         table.setBackground(new Color(25, 25, 30));
@@ -137,13 +133,10 @@ public class PendingCoursesPanel extends JPanel {
         });
     }
 
-    // ============================
     //   BUTTON CELL EDITORS
-    // ============================
     private class ActionEditor extends DefaultCellEditor {
 
         private final boolean approve;
-        private ModernWhiteButton btn;
 
         public ActionEditor(boolean approve) {
             super(new JCheckBox());
@@ -154,7 +147,7 @@ public class PendingCoursesPanel extends JPanel {
         public Component getTableCellEditorComponent(JTable table, Object value,
                                                      boolean selected, int row, int col) {
 
-            btn = new ModernWhiteButton(approve ? "Approve" : "Reject");
+            ModernWhiteButton btn = new ModernWhiteButton(approve ? "Approve" : "Reject");
             btn.setFont(btn.getFont().deriveFont(12f));
 
             btn.addActionListener(e -> {
@@ -169,8 +162,10 @@ public class PendingCoursesPanel extends JPanel {
                 }
 
                 stopCellEditing();
-                reload();
+
+                parent.showPendingCourses();  // refresh whole view
             });
+
 
             return btn;
         }
@@ -179,9 +174,7 @@ public class PendingCoursesPanel extends JPanel {
         public Object getCellEditorValue() { return ""; }
     }
 
-    // ============================
     //   LOAD / REFRESH TABLE DATA
-    // ============================
     private void loadPendingCourses() {
         model.setRowCount(0);
         ArrayList<Course> list = adminService.getPendingCourses();
@@ -200,4 +193,5 @@ public class PendingCoursesPanel extends JPanel {
     public void reload() {
         loadPendingCourses();
     }
+
 }

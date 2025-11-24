@@ -1,21 +1,47 @@
 [
   {
-    "courseId": 5440,
-    "title": "1",
-    "description": "1",
-    "instructorId": 6410,
-    "lessons": [
-      {
-        "lessonId": 4210,
-        "title": "1",
-        "content": "1"
-      }
-    ],
-    "students": [
-      1116,
-      9007,
-      881
-    ],
+    "courseId": 1,
+    "title": "Introduction to Java",
+    "description": "Basic programming principles with Java.",
+    "instructorId": 1001,
+    "lessons": [],
+    "students": [],
+    "status": "REJECTED"
+  },
+  {
+    "courseId": 2,
+    "title": "Data Structures",
+    "description": "Linked lists, stacks, queues, trees, graphs.",
+    "instructorId": 1002,
+    "lessons": [],
+    "students": [],
+    "status": "APPROVED"
+  },
+  {
+    "courseId": 3,
+    "title": "Web Development",
+    "description": "HTML, CSS, JavaScript fundamentals.",
+    "instructorId": 1003,
+    "lessons": [],
+    "students": [],
+    "status": "APPROVED"
+  },
+  {
+    "courseId": 4,
+    "title": "Database Systems",
+    "description": "SQL, normalization, indexing, transactions.",
+    "instructorId": 1002,
+    "lessons": [],
+    "students": [],
+    "status": "PENDING"
+  },
+  {
+    "courseId": 5,
+    "title": "Machine Learning Basics",
+    "description": "Supervised \u0026 unsupervised learning models.",
+    "instructorId": 1004,
+    "lessons": [],
+    "students": [],
     "status": "REJECTED"
   }
 ]

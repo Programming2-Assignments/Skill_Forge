@@ -19,26 +19,24 @@ public class CourseReviewDialog extends JDialog {
         setLayout(new BorderLayout());
         setResizable(false);
 
-        // ====== GLASS BACKGROUND CARD ======
+        // GLASS BACKGROUND CARD
         JPanel card = new JPanel(new BorderLayout());
         card.setOpaque(true);
         card.setBackground(new Color(255, 255, 255, 20));
         card.setBorder(new EmptyBorder(25, 25, 25, 25));
 
-        card.putClientProperty(FlatClientProperties.STYLE, ""
-                + "arc: 22;"
+        card.putClientProperty(FlatClientProperties.STYLE, "arc: 22;"
         );
 
-        // ====== TITLE ======
+        // TITLE
         JLabel title = new JLabel("Course Review", SwingConstants.CENTER);
-        title.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font: 26pt;"
-                + "foreground: white;"
+        title.putClientProperty(FlatClientProperties.STYLE, "font: 26;"
+                + "foreground: #FFFFFF;"
         );
         title.setBorder(new EmptyBorder(0, 0, 20, 0));
         card.add(title, BorderLayout.NORTH);
 
-        // ====== DETAILS SECTION ======
+        // DETAILS SECTION
         JPanel details = new JPanel();
         details.setLayout(new BoxLayout(details, BoxLayout.Y_AXIS));
         details.setOpaque(false);
@@ -57,7 +55,7 @@ public class CourseReviewDialog extends JDialog {
 
         card.add(detailsScroll, BorderLayout.CENTER);
 
-        // ====== ACTION BUTTONS ======
+        // ACTION BUTTONS
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 10));
         buttons.setOpaque(false);
 
@@ -84,20 +82,17 @@ public class CourseReviewDialog extends JDialog {
         add(card);
     }
 
-    // ---------------------------
+
     // DETAIL ROW BUILDER
-    // ---------------------------
     private void addDetail(JPanel parent, String label, String value) {
         JLabel lbl = new JLabel(label + ":");
-        lbl.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font: 15pt;"
+        lbl.putClientProperty(FlatClientProperties.STYLE, "font: 15;"
                 + "foreground: #DDDDDD;"
         );
 
         JLabel val = new JLabel(value);
-        val.putClientProperty(FlatClientProperties.STYLE, ""
-                + "font: 15pt;"
-                + "foreground: white;"
+        val.putClientProperty(FlatClientProperties.STYLE, "font: 15;"
+                + "foreground: #FFFFFF;"
         );
 
         JPanel row = new JPanel(new BorderLayout());
@@ -110,19 +105,17 @@ public class CourseReviewDialog extends JDialog {
         parent.add(row);
     }
 
-    // ---------------------------
+
     // MODERN BUTTON MAKER
-    // ---------------------------
     private JButton createActionButton(String text, String bg, String hover) {
         JButton btn = new JButton(text);
 
-        btn.putClientProperty(FlatClientProperties.STYLE, ""
-                + "arc: 18;"
+        btn.putClientProperty(FlatClientProperties.STYLE, "arc: 18;"
                 + "borderWidth: 0;"
                 + "background: " + bg + ";"
                 + "hoverBackground: " + hover + ";"
-                + "foreground: white;"
-                + "font: 14pt;"
+                + "foreground: #FFFFFF;"
+                + "font: 14;"
         );
 
         btn.setBorder(new EmptyBorder(10, 25, 10, 25));

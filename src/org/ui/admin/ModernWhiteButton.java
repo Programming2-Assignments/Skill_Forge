@@ -6,9 +6,9 @@ import java.awt.*;
 
 public class ModernWhiteButton extends JButton {
 
-    private Color baseColor   = new Color(250, 250, 250);
-    private Color hoverColor  = new Color(245, 245, 245);
-    private Color pressColor  = new Color(230, 230, 230);
+    private final Color baseColor   = new Color(250, 250, 250);
+    private final Color hoverColor  = new Color(245, 245, 245);
+    private final Color pressColor  = new Color(230, 230, 230);
 
     private boolean hovered = false;
     private boolean pressed = false;
@@ -57,7 +57,7 @@ public class ModernWhiteButton extends JButton {
         g2.setColor(fill);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), arc, arc);
 
-        // ------- Inner subtle highlight -------
+        // Inner subtle highlight
         g2.setColor(new Color(255, 255, 255, 120));
         g2.drawRoundRect(1, 1, getWidth() - 2, getHeight() - 2, arc, arc);
 
