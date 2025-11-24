@@ -179,12 +179,14 @@
     "enrolledCourses": [
       3780,
       6593,
-      7171
+      7171,
+      7195
     ],
     "progress": {
       "3780": 100,
       "6593": 100,
-      "7171": 66
+      "7171": 66,
+      "7195": 100
     },
     "lessonsPerCourse": {
       "3780": [
@@ -197,6 +199,9 @@
         7625,
         1855,
         3694
+      ],
+      "7195": [
+        6206
       ]
     },
     "completedLessons": {
@@ -209,6 +214,9 @@
       "7171": [
         7625,
         1855
+      ],
+      "7195": [
+        6206
       ]
     },
     "certificates": [
@@ -223,6 +231,12 @@
         "studentId": 184,
         "courseId": 6593,
         "issueDate": "23/11/2025"
+      },
+      {
+        "certificateId": 9108,
+        "studentId": 184,
+        "courseId": 7195,
+        "issueDate": "24/11/2025"
       }
     ],
     "userId": "184",
@@ -230,5 +244,15 @@
     "email": "y@.com",
     "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
     "role": "Student"
+  },
+  {
+    "coursesID": [
+      7195
+    ],
+    "userId": "6456",
+    "username": "Yousef",
+    "email": "inst@gmail.com",
+    "passwordHash": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
+    "role": "Instructor"
   }
 ]

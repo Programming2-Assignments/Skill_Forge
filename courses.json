@@ -49,7 +49,8 @@
       5067
     ],
     "NoOfLesson": 0,
-    "NoOfChecked": 0
+    "NoOfChecked": 0,
+    "status": "APPROVED"
   },
   {
     "courseId": 6802,
@@ -62,7 +63,8 @@
       5067
     ],
     "NoOfLesson": 0,
-    "NoOfChecked": 0
+    "NoOfChecked": 0,
+    "status": "APPROVED"
   },
   {
     "courseId": 9724,
@@ -74,7 +76,8 @@
       5067
     ],
     "NoOfLesson": 0,
-    "NoOfChecked": 0
+    "NoOfChecked": 0,
+    "status": "REJECTED"
   },
   {
     "courseId": 9283,
@@ -92,7 +95,8 @@
       5067
     ],
     "NoOfLesson": 0,
-    "NoOfChecked": 0
+    "NoOfChecked": 0,
+    "status": "APPROVED"
   },
   {
     "courseId": 7171,
@@ -215,7 +219,8 @@
       184
     ],
     "NoOfLesson": 3,
-    "NoOfChecked": 0
+    "NoOfChecked": 0,
+    "status": "APPROVED"
   },
   {
     "courseId": 6593,
@@ -277,7 +282,8 @@
       184
     ],
     "NoOfLesson": 1,
-    "NoOfChecked": 0
+    "NoOfChecked": 0,
+    "status": "APPROVED"
   },
   {
     "courseId": 3780,
@@ -317,6 +323,46 @@
       184
     ],
     "NoOfLesson": 1,
-    "NoOfChecked": 0
+    "NoOfChecked": 0,
+    "status": "APPROVED"
+  },
+  {
+    "courseId": 7195,
+    "title": "prog 5",
+    "description": "of a7",
+    "instructorId": 6456,
+    "lessons": [
+      {
+        "lessonId": 6206,
+        "title": "off",
+        "content": "kjsbkdf",
+        "check": false,
+        "quiz": {
+          "quizId": "25b7f4bc-e11b-49ca-b6c3-00f3640623b2",
+          "lessonId": "6206",
+          "questions": [
+            {
+              "questionId": "99210a8b-8d3a-4ce4-8826-fe2ccc46a9d2",
+              "text": "1",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "correctOptionIndex": 0
+            }
+          ],
+          "passScore": 60,
+          "maxAttempts": -1
+        }
+      }
+    ],
+    "students": [
+      184
+    ],
+    "NoOfLesson": 1,
+    "NoOfChecked": 0,
+    "status": "PENDING"
   }
 ]

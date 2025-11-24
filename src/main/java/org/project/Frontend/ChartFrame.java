@@ -1,6 +1,6 @@
 package org.project.Frontend;
 
-import org.project.InstructorRole;
+import org.project.service.InstructorRole;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,19 +1,17 @@
-package org.project.model;
-
-import org.project.ApprovalStatus;
+package org.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
+
     private int courseId;
     private String title;
     private String description;
     private int instructorId;
-    private List<Lesson> lessons;
-    private List<Integer> students;
-    private int NoOfLesson;
-    private int NoOfChecked;
+
+    private final List<Lesson> lessons;
+    private final List<Integer> students;
 
     private ApprovalStatus status;
 
@@ -24,6 +22,7 @@ public class Course {
         this.status = ApprovalStatus.PENDING;
     }
 
+    // Full constructor (useful for instructors creating courses)
     public Course(int courseId, String title, String description, int instructorId) {
         this.courseId = courseId;
         this.title = title;
@@ -48,27 +47,11 @@ public class Course {
     public void setTitle(String title) { this.title = title; }
     public void setDescription(String description) { this.description = description; }
     public void setInstructorId(int instructorId) { this.instructorId = instructorId; }
-    public void setLessons(List<Lesson> lessons) { this.lessons = lessons != null ? lessons : new ArrayList<>(); }
-    public void setStudents(List<Integer> students) { this.students = students != null ? students : new ArrayList<>(); }
     public void setStatus(ApprovalStatus status) { this.status = status; }
 
-    // Old methods
-    public int getNoOfLesson() { return NoOfLesson; }
-    public void setNoOfLesson(int noOfLesson) { NoOfLesson = noOfLesson; }
-    public void addlesson() { NoOfLesson++; }
-
-    public void addchecked() { NoOfChecked++; }
-    public double calculateprogress() {
-        if (NoOfLesson == 0) return 0;
-        return (NoOfChecked * 100.0) / NoOfLesson;
-    }
-
-    // New / existing methods
+    // Lesson methods
     public boolean addLesson(Lesson lesson) {
-        if (lessons.stream().anyMatch(l -> l.getLessonId() == lesson.getLessonId())) return false;
-        lessons.add(lesson);
-        addlesson();
-        return true;
+        return lessons.add(lesson);
     }
 
     public boolean removeLessonById(int lessonId) {
@@ -81,10 +64,11 @@ public class Course {
 
     // Student methods
     public boolean enrollStudent(int studentId) {
-        if (students.contains(studentId))
-            return false;
-        students.add(studentId);
-        return true;
+        if (!students.contains(studentId)) {
+            students.add(studentId);
+            return true;
+        }
+        return false;
     }
 
     public boolean unenrollStudent(int studentId) {

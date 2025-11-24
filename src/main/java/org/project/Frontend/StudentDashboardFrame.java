@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDashboardFrame extends JFrame {
     private JsonDatabaseManager db;
@@ -251,13 +252,13 @@ public class StudentDashboardFrame extends JFrame {
                     if(c.getCourseId() == courseId){
                         CertificateView(c);
                         switchView("certificate");
+                        break;
                     }
                 }
             }
         });
 
         mainPanel.add(setupcertificatePanel, "certificateTable");
-
     }
 
     private void CertificateView(Certificate certificate) {
@@ -299,6 +300,9 @@ public class StudentDashboardFrame extends JFrame {
         box.add(Box.createVerticalStrut(20));
         box.add(meta);
 
+        JButton saveBtn = new JButton("Save");
+        certificatePanel.add(saveBtn, BorderLayout.SOUTH);
+        saveBtn.addActionListener(e -> {saveCertificate(certificate);});
         certificatePanel.add(box, BorderLayout.CENTER);
 
         mainPanel.add(certificatePanel, "certificate");
@@ -381,6 +385,46 @@ public class StudentDashboardFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Successfully enrolled!");
         } else {
             JOptionPane.showMessageDialog(this, "Enrollment failed.");
+        }
+    }
+
+    private void saveCertificate(Certificate certificate) {
+        try {
+            // File name
+            String filename = "certificate_" + certificate.getCertificateId() + ".pdf";
+
+            // Create PDF
+            com.itextpdf.text.Document pdfDoc = new com.itextpdf.text.Document();
+            com.itextpdf.text.pdf.PdfWriter.getInstance(pdfDoc, new java.io.FileOutputStream(filename));
+
+            pdfDoc.open();
+
+            // Title
+            com.itextpdf.text.Font titleFont = new com.itextpdf.text.Font(
+                    com.itextpdf.text.Font.FontFamily.HELVETICA, 20, com.itextpdf.text.Font.BOLD);
+            pdfDoc.add(new com.itextpdf.text.Paragraph("Certificate of Completion", titleFont));
+            pdfDoc.add(new com.itextpdf.text.Paragraph("\n"));
+
+            // Content
+            pdfDoc.add(new com.itextpdf.text.Paragraph("Certificate ID : " + certificate.getCertificateId()));
+            pdfDoc.add(new com.itextpdf.text.Paragraph("Student ID     : " + certificate.getStudentId()));
+            pdfDoc.add(new com.itextpdf.text.Paragraph("Course ID      : " + certificate.getCourseId()));
+            pdfDoc.add(new com.itextpdf.text.Paragraph("Issue Date     : " + certificate.getIssueDate()));
+
+            pdfDoc.close();
+
+            // Show success message
+            JOptionPane.showMessageDialog(this,
+                    "Certificate saved as:\n" + filename,
+                    "Download Successful",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Error downloading certificate.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 

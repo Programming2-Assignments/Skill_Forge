@@ -2,6 +2,7 @@ package org.project.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.*;
+import org.project.ApprovalStatus;
 import org.project.model.Course;
 import org.project.model.Lesson;
 
@@ -163,11 +164,71 @@ public class CourseJsonDb {
         return false;
     }
 
-    public boolean enrollStudent(int courseId, int studentId) {
-        return enrollStudent(courseId, studentId);
+    public ArrayList<Course> getPendingCourses() {
+        ArrayList<Course> courses = loadCourses();
+        ArrayList<Course> pending = new ArrayList<>();
 
+        for (Course c : courses) {
+            if (c.getStatus() == ApprovalStatus.PENDING) {
+                pending.add(c);
+            }
+        }
+        return pending;
     }
 
-    public boolean unenrollStudent(int courseId, int studentId) {
-        return unenrollStudent(courseId, studentId);}
+    // APPROVE COURSE
+    public void approveCourse(int courseId) {
+        Course c = getCourseById(courseId);
+        if (c == null) return;
+        c.setStatus(ApprovalStatus.APPROVED);
+        updateCourse(c);
+    }
+
+    // REJECT COURSE
+    public void rejectCourse(int courseId) {
+        Course c = getCourseById(courseId);
+        if (c == null) return;
+        c.setStatus(ApprovalStatus.REJECTED);
+        updateCourse(c);
+    }
+
+    // GET APPROVED COURSES
+    public ArrayList<Course> getApprovedCourses() {
+        ArrayList<Course> courses = loadCourses();
+        ArrayList<Course> approved = new ArrayList<>();
+
+        for (Course c : courses) {
+            if (c.getStatus() == ApprovalStatus.APPROVED) {
+                approved.add(c);
+            }
+        }
+        return approved;
+    }
+
+    // ⭐ THE MISSING METHOD ⭐
+    public ArrayList<Course> getRejectedCourses() {
+        ArrayList<Course> courses = loadCourses();
+        ArrayList<Course> rejected = new ArrayList<>();
+
+        for (Course c : courses) {
+            if (c.getStatus() == ApprovalStatus.REJECTED) {
+                rejected.add(c);
+            }
+        }
+        return rejected;
+    }
+
+    // ENROLL STUDENT (ONLY IF APPROVED)
+    public boolean enrollStudent(int courseId, int studentId) {
+        Course c = getCourseById(courseId);
+        if (c == null) return false;
+
+        if (c.getStatus() != ApprovalStatus.APPROVED) {
+            return false;
+        }
+
+        boolean added = c.enrollStudent(studentId);
+        updateCourse(c);
+        return added;
+    }
 }
